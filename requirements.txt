@@ -5,3 +5,5 @@ sphinxcontrib-googleanalytics
 sphinxcontrib-addmetahtml
 sphinxcontrib-nwdiag
 sphinxcontrib-blockdiag
+mkdocs==1.2.3
+jinja2==3.0.0
