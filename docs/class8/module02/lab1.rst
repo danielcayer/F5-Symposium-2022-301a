@@ -66,8 +66,8 @@ Troubleshoot and fix.
 *Q6. What profile was needed to correct the error?*
 
 
-TCP Express
------------
+TCP Profiles
+------------
 
 Set client-side and server-side TCP profiles on your virtual server
 properties.
@@ -85,8 +85,8 @@ and tcp-lan-optimized profiles? Why might you want to change it?*
 
 *Q3. What happens if you increase the proxy buffer sizes?*
 
-Securing web applications with the HTTP profile
------------------------------------------------
+HTTP profiles
+-------------
 
 Here you are going to perform some custom profile alterations to help
 secure the web site. You are going to make sure hackers cannot see error

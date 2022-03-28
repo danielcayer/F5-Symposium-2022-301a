@@ -288,77 +288,6 @@ refresh the browser page.
 
    Re-enable the pool members before continuing.
 
-
-Securing web applications with the HTTP profile
------------------------------------------------
-
-Here you are going to perform some custom profile alterations to help
-secure the web site. You are going to make sure hackers cannot see error
-codes returned, scrub the response headers of extraneous and potentially
-dangerous information and encrypt the persistence cookie to prevent
-tampering.
-
-Obtain the cookie name and information by browsing to
-**https://10.1.10.115/** and open the **Display Cookie**. The cookie name is
-everything in front of the **=** sign. How BIG-IP creates cookies for
-Cookie Insert persistence can be found at https://support.f5.com/csp/article/K6917. After reading this article you could craft a cookie to hit a particular server.
-
-*Q1. What is the cookie name? Note the information after the cookie.*
-
-Let's begin by creating a custom HTTP profile.
-
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Name:                                  | **secure-my-website**                    |                                             |
-+========================================+==========================================+=============================================+
-| Set the Fallback Host                  | **http://www.f5.com**                    |                                             |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Fallback on Error Codes                | **404 500-505**                          | The fallback site if an error is received   |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Response Headers Allowed               | **Content-Type Set-Cookie Location**     |                                             |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Encrypt Cookies                        | **<cookie name you obtained earlier>**   |                                             |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Cookie Encryption Passphrase           | **xcookie**                              |                                             |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Confirm Cookie Encryption Passphrase   | **xcookie**                              |                                             |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-| Insert XForwarded For                  | **Enable**                               | Example of modify headers                   |
-+----------------------------------------+------------------------------------------+---------------------------------------------+
-
-*Q2. What is in the X-Forwarded-For header? Why might you want to enable
-it?*
-
-Attach your new HTTP Profile to your **secure\_vs** virtual server
-
-Browse to **https://10.1.10.115**.
-
-Do the web pages appear normal? On the web page under, **HTTP Request
-and Response Information** select the **Request and Response Headers**
-link.
-
-Open a new browser to **http://10.1.10.100**. On the web page under, **HTTP
-Request and Response Information** select the **Request and Response
-Headers** link.
-
-*Q3. Are they the same? What is different?*
-
-Now browse to a bad page.
-
-For example, **https://10.1.10.115/badpage**
-
-*Q4. What is the result?*
-
-Under, **HTTP Request and Response Information** select the **Display
-Cookie** link.
-
-*Q5. What is different from the cookie at the start of the task?*
-
-.. NOTE::
-
-   Even though the data is encrypted between your browser and the
-   virtual server, the LTM can still modify the data (i.e. resource
-   cloaking) because the data is unencrypted and decompressed within TMOS.
-
 (Optional) Default Monitors
 ---------------------------
 
@@ -474,8 +403,8 @@ out of the pool.
 
    Be sure to un-reverse your monitor before continuing.
 
-(Optional) Pool Member and Virtual Servers
-------------------------------------------
+(Optional) Effects of Monitors on Members, Pools and Virtual Servers
+--------------------------------------------------------------------
 
 In this task, you will determine the effects of monitors on the status
 of pools members.
@@ -493,9 +422,6 @@ Go to **Local Traffic > Monitors** and select **Create**.
 +----------------------+------------------+
 | **Timeout**          | 46               |
 +----------------------+------------------+
-
-Effects of Monitors on Members, Pools and Virtual Servers
----------------------------------------------------------
 
 Go to **Local Traffic > Pools > www\_pool** and assign **mysql\_monitor** to the pool.
 
@@ -650,8 +576,8 @@ In the **Webmin** tab **Start Apache**.
 *Q8. Did the www\_pool come up within 30 seconds without client traffic?
 What did the tcpdump show?*
 
-Create an Extended Application Verification (EAV) monitor
----------------------------------------------------------
+(Optional) Create an Extended Application Verification (EAV) monitor
+--------------------------------------------------------------------
 
 Log on to the F5 DevCentral site **http://devcentral.f5.com** and go to the
 following link:
@@ -694,98 +620,13 @@ other monitors.
 
 *Q2. Are your members up? What would happen if the external monitor returned* **DOWN**\ *?*
 
-1.05 - Choose virtual server type and load balancing type to fit application requirements
-=========================================================================================
-
-Ratio Load Balancing
---------------------
-
-Go to Local **Traffic > Pools** and select **www\_pool** and then
-**Members** from the top bar or you could click on the **Members** link
-in the **Pool List** screen.
-
-.. HINT:: 
-
-   When we created the pool, we performed all our configuration on
-   one page, but when we modify a pool the Resource information is under
-   the Members tab
-
-Under **Load Balancing** section change the **Load Balancing Method** to **Ratio (Member)**
-
-In drop-down menu, notice most load balancing methods have two options, **(Node)** or **(Member)**.
-
-*Q1. What is the difference between Node and Member?*
-
-Select the first member in the pool **10.1.20.11:80** and change the
-**Ratio** of the member to **3**
-
-Open the pool statistics and reset the statistics for **www\_pool**.
-
-Browse to **http://10.1.10.100** and refresh the browser screen several
-times.
-
-*Q2. How many Total connections has each member taken? Is the ratio of
-connections correct?*
-
-Now go back and put the pool back to **Round Robin** Load Balancing
-Method
-
-Reset the pool statistics and refresh the virtual server page several
-times.
-
-*Q3. Does the ratio setting have any impact now?*
-
-Priority Groups Lab
--------------------
-
-Let's look at priority groups. In this scenario we will treat the 10.1.20.13
-server as if it was is in a disaster recovery site that can be reached
-over a backhaul. You want to maintain at least two members in the pool for
-redundancy and load.  You would traffic to be distributed t0 10.1.20.13 only during maintenance of one on the two primary servers or if one to the two other pool members fails.
-
-.. NOTE::
-
-   Remove any caching profiles from the www\_vs virtual server (10.1.10.100).
-
-Go to the **www\_pool** **Members** section. Make sure the load
-balancing method is **Round Robin**.
-
-Set the **Priority Group Activation** to less than **2** Available
-Members.
-
-Select the pool members **10.1.20.11** and **10.1.20.12** and set their
-**Priority Group** to **10**.
-
-Review your settings and let's see how load balancing reacts now.
-
-Select the **Statistics** tab, reset the pool statistics, browse to
-**http://10.1.10.100** and refresh several times.
-
-*Q1. Are all members taking connections? Which member isn't taking
-connections?*
-
-Let's simulate a maintenance window or an outage by disabling a pool
-member **10.1.20.11:80** in the highest priority group. This should
-cause low priority group to be activated, since number of active members
-in our high priority group has dropped below 2.
-
-*Q2. Is the lower priority group activated and taking connections?*
-
-Select a member in the **Priority Group** 10 and **Disable** that pool
-member.
-
-Once again, select **Statistics**, reset the pool statistics, browse to the
-virtual server and see which pool members are taking hits now.
-
-.. IMPORTANT::
-
-   Once you are done testing re-enable your disabled pool member.
-
-1.06 - Determine how to architect and deploy multi-tier applications using LTM
-==============================================================================
 
 (Optional) Working with Analytics (AVR)
 =======================================
+
+You will use an analytics profile that will be used to test Application Visibility and
+Reporting (aka Analytics). In interest of time and to avoid typing
+errors the iRules and Data Groups have been predefined.
 
 AVR Lab Setup - Verify provisioning, iRules and Data Group
 ----------------------------------------------------------
