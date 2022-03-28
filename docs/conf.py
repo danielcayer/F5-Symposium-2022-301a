@@ -114,9 +114,9 @@ extensions = [
 #  'sphinxcontrib.nwdiag',
 #  'sphinxcontrib.rackdiag',
 #  'sphinxcontrib.packetdiag',
-  'sphinx_copybutton',
-  'sphinxcontrib.blockdiag',
-  'sphinx.ext.autosectionlabel'
+#  'sphinx_copybutton',
+#  'sphinxcontrib.blockdiag',
+#  'sphinx.ext.autosectionlabel'
 ]
 
 if 'googleanalytics_id' in locals() and len(googleanalytics_id) > 0:
