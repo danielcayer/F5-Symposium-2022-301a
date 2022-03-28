@@ -5,7 +5,7 @@ You will create and configure various profiles objects to address application re
 
 Estimated completion time: **45 minutes**
 
-301a Objectives covered: 
+301a Objectives covered:
 
 .. toctree::
    :maxdepth: 2

@@ -29,33 +29,33 @@ Welcome to the |classbold| last updated on 10/20/20
 
    intro*
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 101 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 101 Certification Exam Resources:
+..    :glob:
 
-   class1/class1
+..    class1/class1
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 201 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 201 Certification Exam Resources:
+..    :glob:
 
-   class3/class3
+..    class3/class3
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 201 Certification Lab:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 201 Certification Lab:
+..    :glob:
 
-   class4/class4
+..    class4/class4
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 202 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 202 Certification Exam Resources:
+..    :glob:
 
-   class5/class5
+..    class5/class5
 
 .. toctree::
    :maxdepth: 1
@@ -65,45 +65,45 @@ Welcome to the |classbold| last updated on 10/20/20
    class7/class7
    class8/class8
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 301B Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 301B Certification Exam Resources:
+..    :glob:
 
-   class9/class9
+..    class9/class9
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 302 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 302 Certification Exam Resources:
+..    :glob:
 
-   class11/class11
+..    class11/class11
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 303 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 303 Certification Exam Resources:
+..    :glob:
 
-   class13/class13
+..    class13/class13
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 304 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 304 Certification Exam Resources:
+..    :glob:
 
-   class15/class15
+..    class15/class15
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 401 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 401 Certification Exam Resources:
+..    :glob:
 
-   class17/class17
+..    class17/class17
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unofficial - 402 Certification Exam Resources:
-   :glob:
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Unofficial - 402 Certification Exam Resources:
+..    :glob:
 
-   class19/class19
+..    class19/class19
 

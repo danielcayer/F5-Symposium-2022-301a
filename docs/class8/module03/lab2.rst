@@ -11,7 +11,7 @@ Go to Local **Traffic > Pools** and select **www\_pool** and then
 **Members** from the top bar or you could click on the **Members** link
 in the **Pool List** screen.
 
-.. HINT:: 
+.. HINT::
 
    When we created the pool, we performed all our configuration on
    one page, but when we modify a pool the Resource information is under

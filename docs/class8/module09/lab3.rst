@@ -1,8 +1,5 @@
-Traffic Groups
-==============
-
-Build a New Traffic Group.
---------------------------
+Build a New Traffic Group
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You are now going to build an active-active cluster by creating a new
 traffic-group and forcing that traffic group to run on the Standby

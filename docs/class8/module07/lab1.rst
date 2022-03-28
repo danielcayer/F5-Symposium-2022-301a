@@ -1,241 +1,108 @@
-(Optional) Working with Analytics (AVR)
-=======================================
+2.01 - Determine how to secure SelfIPs
+======================================
 
-You will use an analytics profile that will be used to test Application Visibility and
-Reporting (aka Analytics). In interest of time and to avoid typing
-errors the iRules and Data Groups have been predefined.
-
-AVR Lab Setup - Verify provisioning, iRules and Data Group
-----------------------------------------------------------
-
-In this task you prep the BIG-IP for the Application Visibility and
-Reporting (AVR) lab. In the interest of time AVR has already been
-provisioned, a data group has been built and two iRules have been
-prepopulated on the BIG-IP.
-
-AVR is **NOT** provisioned by default, but should be already be
-provisioned on this BIG-IP. You can verify this by going to **System >>
-Resource Provisioning**. Application Visibility and Reporting should be
-set to Nominal.
-
-*Q1. What resources does AVR require to be provisioned?*
-
-Go to **Local Traffic > iRules > iRules List** and select **Data Group
-List** from the top-bar
-
-A **Data Group** named **user\_agents** has already been created for
-you.
-
-+--------------+-------------+
-| **String**   | **Value**   |
-+==============+=============+
-| agent        | IE9         |
-+--------------+-------------+
-| agent1       | IE11        |
-+--------------+-------------+
-| agent2       | IE11        |
-+--------------+-------------+
-| agent3       | Chrome      |
-+--------------+-------------+
-| agent4       | Firefox     |
-+--------------+-------------+
-| agent5       | Safari      |
-+--------------+-------------+
-| agent6       | iPhone5     |
-+--------------+-------------+
-| agent7       | iPhone6     |
-+--------------+-------------+
-| agent8       | iPhone6     |
-+--------------+-------------+
-| agent9       | Android     |
-+--------------+-------------+
-
-To save time and typing errors, the iRules required for this lab have
-already been configured on the BIG-IP. Find the iRules below under
-**Local Traffic > iRules > iRule List** and verify the iRules exist.
-We use these iRules to modify traffic and give Analytics something
-interesting to see.
-
-**random\_client\_ip** - randomizes the client IPs and user agents using
-the data group you built::
-
-   when CLIENT_ACCEPTED {
-   # Create a random IP address and use it to replace the client IP to simulate many clients
-   # going through the virtual
-      snat [expr int(rand()*255)].[expr int(rand()*255)].[expr int(rand()*255)].[expr int(rand()*254)]
-      virtual avr_virtual2
-   }
-   when HTTP_REQUEST {
-   # When the HTTP request comes in, select a random user agents and put that agent
-   # in the user-agent HTTP header to simulate many different user agents
-      set my_index [expr int(rand()*10)]
-      set user_agent [class element -value $my_index user_agents]
-         HTTP::header replace user-Agent $user_agent
-   }
-
-*Q2. Review the iRule, what profiles are required on the virtual server?*
-
-**delay_server** - introduces delay into server-side traffic::
-
-   when LB_SELECTED {
-   # After a member has been selected by the load balancing algorithm introduce delay
-   # (in milliseconds) on the specified URL or server
-      if {([LB::server addr] equals "10.1.20.13") and ([HTTP::uri] equals "/welcome.php")} { after 10}
-	
-      if {[LB::server addr] equals "10.1.20.13"} {after 20}
-   }
-
-*Q3. Review the iRule, what profiles are required on the virtual server?*
-
-Create an Analytics Profile
----------------------------
-
-Create an analytics profile that will be used with a virtual server.
-
-In the Configuration Utility, open the **Local Traffic > Profiles >
-Analytics** page, and then click **Create**.
-
-Create an analytics profile using the following information, and then
-click **Finished**.
-
-+--------------------------+-----------------------------------------+
-| **Profile Name**         | custom_analytics                        |
-+==========================+=========================================+
-| **Collected Metrics**    | Max TPS Throughput                      |
-|                          |                                         |
-|                          | Page Load Time                          |
-+--------------------------+-----------------------------------------+
-| **Collected Entities**   | URLs                                    |
-|                          |                                         |
-|                          | Countries                               |
-|                          |                                         |
-|                          | Client IP Addresses                     |
-|                          |                                         |
-|                          | Client Subnets                          |
-|                          |                                         |
-|                          | Response Codes                          |
-|                          |                                         |
-|                          | User Agents                             |
-|                          |                                         |
-|                          | Methods                                 |
-+--------------------------+-----------------------------------------+
- 
-Create a Web Application
+Effects of Port Lockdown
 ------------------------
 
-.. NOTE:: 
+In the exercise, you will do some basic configuration of DNS and NTP and
+work with port lockdown.
 
-   The **avr_virtual2** destination address is the default gateway of the web servers.
+Working with port lockdown on self IPs.
 
-.. list-table::
-   :widths: 40 30
+Ping **10.1.10.245**
 
-   *  - Name 
-      - **avr_virtual2**
-   *  - Destination Address
-      - **10.1.20.240**
-   *  - Service Port
-      - **80 (HTTP)**
-   *  - Configuration
-      - **Advanced**
-   *  - HTTP Profile
-      - **http**
-   *  - Source Address Translation
-      - **Auto Map**
-   *  - Analytics Profile
-      - **custom_analytics**
-   *  - iRules 
-      - **delay_server**
-   *  - Default Pool 
-      - **www_pool**
- 
-Create another virtual server using the following information, and then
-click Finished.
+*Q1. Was echo response received?*
 
-.. NOTE:: 
+SSH to **10.1.10.245**
 
-   Within the iRule attached to this virtual you are pointing traffic to the virtual server you created above, so avr_virtual2 had to be created first.
+*Q2. Was ssh successful? Why not?*
 
-.. list-table::
-   :widths: 40 30
+Open **Network > Self IPs > 10.1.10.245** and change **Port Lockdown**
+to **Allow Defaults**
 
-   *  - Name 
-      - **avr_virtual1**
-   *  - Destination Address
-      - **10.1.10.90**
-   *  - Service Port
-      - **80 (HTTP)**
-   *  - HTTP Profile
-      - **http**
-   *  - iRules 
-      - **random_client_ip**
+SSH to **10.1.10.245**
 
-Visit the Web Site to Generate AVR Data 
----------------------------------------
+Browse to **https://10.1.10.245**
 
-Use a web browser to access the virtual server, and then view the
-**Analytics** statistics.
+*Q3. Did SSH work? Did browsing work?*
 
-Use a new tab to access **http://10.1.10.90**. It is recommended you use
-private browsing.
+*Q4. What other ports are opened when you select* **Allow Defaults**.
 
-Type **<Ctrl>F5** several times to refresh the page. Do this for each of
-the next steps.
+Open **Network > Self IPs > 10.1.10.245** and change Port Lockdown to
+**Allow Custom** and add **TCP** port **22**
 
-Click the **Welcome** link, and then click the banner at the top of the
-page to return to the home page.
+SSH to **10.1.10.245**
 
-Click the **Stream Profile Example** link. Click the banner at the top
-to return to the home page.
+Browse to **https://10.1.10.245**
 
-Click on the **Multiple Stream Example** link. Click the banner at the
-top of the page to return home.
+*Q5. Did SSH work? Did browsing work?*
 
-Click the **Request and Response Headers** link. Click the banner at the
-top of the page to return home.
+2.02 - Determine how to secure virtual servers
+==============================================
 
-Close the F5 vLab Test Web Site tab.
+Here you are going to perform some custom profile alterations to help
+secure the web site. You are going to make sure hackers cannot see error
+codes returned, scrub the response headers of extraneous and potentially
+dangerous information and encrypt the persistence cookie to prevent
+tampering.
 
-Open the **Statistics > Analytics > HTTP > Overview page**.
+Obtain the cookie name and information by browsing to
+**https://10.1.10.115/** and open the **Display Cookie**. The cookie name is
+everything in front of the **=** sign. How BIG-IP creates cookies for
+Cookie Insert persistence can be found at https://support.f5.com/csp/article/K6917. After reading this article you could craft a cookie to hit a particular server.
 
-.. HINT::
+*Q1. What is the cookie name? Note the information after the cookie.*
 
-   If you don't see anything, set your Auto Refresh to 1 minute. It may
-   take up to 5 minutes for analytics data to load.
+Let's begin by creating a custom HTTP profile.
 
-View the Analytics Reports
---------------------------
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Name:                                  | **secure-my-website**                    |                                             |
++========================================+==========================================+=============================================+
+| Set the Fallback Host                  | **http://www.f5.com**                    |                                             |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Fallback on Error Codes                | **404 500-505**                          | The fallback site if an error is received   |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Response Headers Allowed               | **Content-Type Set-Cookie Location**     |                                             |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Encrypt Cookies                        | **<cookie name you obtained earlier>**   |                                             |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Cookie Encryption Passphrase           | **xcookie**                              |                                             |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Confirm Cookie Encryption Passphrase   | **xcookie**                              |                                             |
++----------------------------------------+------------------------------------------+---------------------------------------------+
+| Insert XForwarded For                  | **Enable**                               | Example of modify headers                   |
++----------------------------------------+------------------------------------------+---------------------------------------------+
 
-Use the **Analytics** page to view statistics information on the BIG-IP
-system.
+*Q2. What is in the X-Forwarded-For header? Why might you want to enable
+it?*
 
-In the Configuration Utility, refresh the **Statistics > Analytics >
-HTTP > Overview** page until you see statistics.
+Attach your new HTTP Profile to your **secure\_vs** virtual server
 
-Once you have data set the **Override** time range to list box, select
-**Last Hour**.
+Browse to **https://10.1.10.115**.
 
-Open the **Transactions** page from the top bar. Let's review some of
-the various data compiled.
+Do the web pages appear normal? On the web page under, **HTTP Request
+and Response Information** select the **Request and Response Headers**
+link.
 
-From the **View By** list box, select **Pool Members**.
+Open a new browser to **http://10.1.10.100**. On the web page under, **HTTP
+Request and Response Information** select the **Request and Response
+Headers** link.
 
-From the **View By** list box, select **URLs**.
+*Q3. Are they the same? What is different?*
 
-From the **View By** list box, select **Response Codes**.
+Now browse to a bad page.
 
-Users are complaining of intermittent slow responses.
+For example, **https://10.1.10.115/badpage**
 
-Open the **Latency > Server Latency** page, and then from the **View
-By** list box, select **Pool Members**.
+*Q4. What is the result?*
 
-*Q1. Does a particular pool member seem to be an issue?*
+Under, **HTTP Request and Response Information** select the **Display
+Cookie** link.
 
-In the **Details** section, click **10.1.20.13:80**, and then from the
-**View By** list box, select **URLs**.
+*Q5. What is different from the cookie at the start of the task?*
 
-Go to **Transactions**.
+.. NOTE::
 
-*Q2. What country has the most transactions?*
-
-*Q3. What are the top two User Agents?*
+   Even though the data is encrypted between your browser and the
+   virtual server, the LTM can still modify the data (i.e. resource
+   cloaking) because the data is unencrypted and decompressed within TMOS.
