@@ -26,7 +26,7 @@ This class covers the following topics:
 Expected time to complete: **6-8 hours**
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :glob:
 
    module*/module*
