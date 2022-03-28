@@ -1,5 +1,3 @@
-Securing Web Applications
-=========================
 
 Securing web applications with the HTTP profile
 -----------------------------------------------

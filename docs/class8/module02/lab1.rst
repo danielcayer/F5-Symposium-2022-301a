@@ -1,21 +1,6 @@
 1.01 - Determine which configuration objects are necessary to optimally deploy an application
 =============================================================================================
 
-1.02 - Determine whether or not an application can be deployed with only the LTM module provisioned
-====================================================================================================
-
-1.03 - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
-============================================================================================================
-
-1.04 - Choose correct profiles and settings to fit application requirements
-===========================================================================
-
-1.05 - Choose virtual server type and load balancing type to fit application requirements
-=========================================================================================
-
-Working with Profiles
-=====================
-
 Working with profiles
 ---------------------
 
@@ -79,3 +64,31 @@ Assign the **secure\_pool** to the **secure\_vs** once again. Browse to
 Troubleshoot and fix.
 
 *Q6. What profile was needed to correct the error?*
+
+
+TCP Express
+-----------
+
+Set client-side and server-side TCP profiles on your virtual server
+properties.
+
+From the drop-down menus place the **tcp-wan-optimized** profile on the
+client-side and the **tcp-lan-optimized** profile on the server-side.
+
+Note the custom boxes in each of the TCP profiles you used.
+
+*Q1. What is the idle timeout in each profile? Why might you want to
+change it?*
+
+*Q2. What is the Nagle selection in the default TCP, tcp-wan-optimized
+and tcp-lan-optimized profiles? Why might you want to change it?*
+
+*Q3. What happens if you increase the proxy buffer sizes?*
+
+
+1.02 - Determine whether or not an application can be deployed with only the LTM module provisioned
+====================================================================================================
+
+1.03 - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
+============================================================================================================
+

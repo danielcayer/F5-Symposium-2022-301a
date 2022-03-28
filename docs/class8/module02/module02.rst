@@ -1,7 +1,7 @@
-Lab 2 - Profiles
+Lab 2 - LTM config objects, functionality and capabilities
 ===================
 
-<enter description>
+In this lab, you will identify and configure various LTM objects required to deploy an application. 
 
 provious topics:
        - Given a scenario, determine the minimum profiles for an application
