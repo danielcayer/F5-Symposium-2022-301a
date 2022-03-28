@@ -31,7 +31,7 @@ profiles?*
 *Q2. Could you use L7 iRules or profiles to view or modify the request or
 response? Why or why not?*
 
-Modify **secure\_vs** to use the HTTP (80) **www\_pool**. 
+Modify **secure\_vs** to use the HTTP (80) **www\_pool**.
 
 Verify your virtual server is available and then browse to
 **https://10.1.10.115**.  View the TCPdumps.
@@ -87,7 +87,7 @@ and tcp-lan-optimized profiles? Why might you want to change it?*
 
 
 1.02 - Determine whether or not an application can be deployed with only the LTM module provisioned
-====================================================================================================
+===================================================================================================
 
 1.03 - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
 ============================================================================================================
