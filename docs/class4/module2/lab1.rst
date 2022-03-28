@@ -47,7 +47,7 @@ symbol a square?*
 Establish ftp connection to 10.1.10.100 and ensure successful login::
  
    Username: root 
-   Password: default
+   Password: default.F5demo.com
 
 Disable **ftp\_vs**.
 

@@ -116,7 +116,7 @@ Test your logging configuration
 
 Generate and view a **mcpd** event.
 
-SSH to the syslog-ng server at **10.1.1.252** (credentials are **root/default**)..
+SSH to the syslog-ng server at **10.1.1.252** (credentials are **root/default.F5demo.com**)..
 
 Watch the **bigip.log** syslog file for your events::
 

@@ -4,7 +4,11 @@ Lab 4 - Monitors and Status
 In this section you will configure and apply monitors and interpret the results.
 
 301a Objectives covered: 
-   - 1.08-1.10
+   - 1.08-1.09
+       - Determine which configuration objects are necessary for applications that need the original client IP address
+       - Identify the matching order of multiple virtual servers
+       - 
+       - 
        - Given a scenario, determine the appropriate monitor type and
          parameters to use
        - Given a set of parameters, predict an outcome of a monitor status

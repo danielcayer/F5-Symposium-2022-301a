@@ -39,7 +39,7 @@ Let's simulate a failure. Open a new browser tab to
 back-end server::
 
    Username: root 
-   Password: default
+   Password: default.F5demo.com
 
 Under **Servers** on the side-bar, select the **Apache Webserver** link.
 In the upper right corner select the **Stop Apache** link. This will

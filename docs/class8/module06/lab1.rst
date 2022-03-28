@@ -13,7 +13,7 @@ bottom of the jumpbox.
 .. code-block:: bash
 
    ssh root@10.1.1.245
-   password: default
+   Password: default.F5demo.com
 
 Use tcpdump to monitor traffic from the client (10.1.10.51) destined to
 **ftp\_vs** (10.1.10.100)
@@ -28,7 +28,7 @@ connection table.
 .. code-block:: bash
 
    ssh root@10.1.1.245
-   password: default
+   Password: default.F5demo.com
 
    tmsh
 

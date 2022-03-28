@@ -61,7 +61,7 @@ information.
 You can get more detailed information on Web Acceleration profils and cache entries at the
 CLI level
 
-Log onto the CLI of your BIG-IP via SSH using the root account (root/default).
+Log onto the CLI of your BIG-IP via SSH using the root account (root/default.F5demo.com).
 
 At the CLI go into **tmsh** at the (tmos)# prompt and enter::
 

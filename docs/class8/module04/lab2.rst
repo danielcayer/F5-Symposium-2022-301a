@@ -40,7 +40,7 @@ Server statics GUI interface.
 
 Establish ftp connection to **10.1.10.100** and ensure successful login.
 
-- Logon credentials are **root/default**
+- Logon credentials are **root/default.F5demo.com**
 
 Disable **ftp\_vs**.
 
