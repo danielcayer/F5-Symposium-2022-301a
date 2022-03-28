@@ -3,7 +3,7 @@ git+https://github.com/f5devcentral/f5-sphinx-theme@master#egg=f5_sphinx_theme
 recommonmark
 sphinxcontrib-googleanalytics
 sphinxcontrib-addmetahtml
-#sphinxcontrib-nwdiag
+sphinxcontrib-nwdiag
 sphinxcontrib-blockdiag
 mkdocs==1.2.3
 jinja2==3.0.0
