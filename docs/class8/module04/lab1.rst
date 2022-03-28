@@ -1,3 +1,9 @@
+1.08 - Determine which configuration objects are necessary for applications that need the original client IP address
+====================================================================================================================
+
+1.09 - Identify the matching order of multiple virtual servers
+==============================================================
+
 SNATs and NATs
 ==============
 

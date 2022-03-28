@@ -4,12 +4,11 @@ Lab 2 - Profiles
 <enter description>
 
 301 Objectives covered: 
-   - 1.01 - 1.05
-       - Determine which configuration objects are necessary to optimally deploy an application
-       - Determine whether or not an application can be deployed with only the LTM module provisioned
-       - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
-       - Choose correct profiles and settings to fit application requirements
-       - Choose virtual server type and load balancing type to fit application requirements
+   - 1.01 - Determine which configuration objects are necessary to optimally deploy an application
+   - 1.02 - Determine whether or not an application can be deployed with only the LTM module provisioned
+   - 1.03 - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
+   - 1.04 - Choose correct profiles and settings to fit application requirements
+   - 1.05 - Choose virtual server type and load balancing type to fit application requirements
        - 
        - 
        - Given a scenario, determine the minimum profiles for an application

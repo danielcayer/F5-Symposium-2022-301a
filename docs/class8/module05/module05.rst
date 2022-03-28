@@ -9,9 +9,8 @@ errors the iRules and Data Groups have been predefined.
 In this module, you will go over the basics of importing/creating certificates and building virtual servers that can encrypt and decrypt traffic.
 
 301a Objectives covered: 
-   - 1.10 - 1.11
-       - Given a basic iRule's functionality, determine the profiles and configuration options necessary to implement the iRule
-       - Describe how to deploy applications using iApp templates
+   - 1.10 - Given a basic iRule's functionality, determine the profiles and configuration options necessary to implement the iRule
+   - 1.11 - Describe how to deploy applications using iApp templates
        - 
        - 
        - Given a set of application SSL requirements, determine the

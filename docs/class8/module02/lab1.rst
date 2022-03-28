@@ -1,3 +1,18 @@
+1.01 - Determine which configuration objects are necessary to optimally deploy an application
+=============================================================================================
+
+1.02 - Determine whether or not an application can be deployed with only the LTM module provisioned
+====================================================================================================
+
+1.03 - Identify the difference between deployments (e.g., one arm, two arm, npath, Direct Server Return/DSR)
+============================================================================================================
+
+1.04 - Choose correct profiles and settings to fit application requirements
+===========================================================================
+
+1.05 - Choose virtual server type and load balancing type to fit application requirements
+=========================================================================================
+
 Working with Profiles
 =====================
 

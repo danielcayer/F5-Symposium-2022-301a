@@ -7,9 +7,8 @@ Reporting (aka Analytics). In interest of time and to avoid typing
 errors the iRules and Data Groups have been predefined.
 
 301a Objectives covered: 
-   - 1.06 - 1.07
-       - Determine how to architect and deploy multi-tier applications using LTM
-       - Determine between packet based versus connection based load balancing
+   - 1.06 - Determine how to architect and deploy multi-tier applications using LTM
+   - 1.07 - Determine between packet based versus connection based load balancing
        - 
        -  
        - Explain the steps necessary to configure AVR

@@ -1,5 +1,5 @@
-Lab 1 - Basic Setup, TMSH and SNATs
-======================================
+Lab 1 - Basic vLab Environment Setup
+====================================
 
 In this section, you will provide the basic networking, create a virtual
 server and pool to test your comfort level with basic set up. Try

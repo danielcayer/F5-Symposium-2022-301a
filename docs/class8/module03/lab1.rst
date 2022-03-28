@@ -1,3 +1,10 @@
+1.06 - Determine how to architect and deploy multi-tier applications using LTM
+==============================================================================
+
+1.07 - Determine between packet based versus connection based load balancing
+============================================================================
+
+
 Working with Analytics (AVR)
 ============================
 

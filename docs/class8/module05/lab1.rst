@@ -1,3 +1,9 @@
+1.10 - Given a basic iRule's functionality, determine the profiles and configuration options necessary to implement the iRule
+=============================================================================================================================
+
+1.11 - Describe how to deploy applications using iApp templates
+===============================================================
+
 SSL Certificates and Profiles
 =============================
 
