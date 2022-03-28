@@ -1,7 +1,5 @@
-Virtual Server Status
-=====================
-Test Disabled Virtual Servers
------------------------------
+(Optional) Test Disabled Virtual Servers
+----------------------------------------
 
 In this task, you will disable and enable various virtual servers and
 note the behavior.

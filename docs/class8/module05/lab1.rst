@@ -4,11 +4,8 @@
 1.11 - Describe how to deploy applications using iApp templates
 ===============================================================
 
-SSL Certificates and Profiles
-=============================
-
-Creating and Importing Certs and Key
-------------------------------------
+Creating and Importing SSL Certs and Key
+----------------------------------------
 
 You want the highest levels of encryption between the BIG-IP and the
 client, but you do not require the same levels of encryption between the
