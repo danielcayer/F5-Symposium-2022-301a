@@ -87,6 +87,3 @@ virtual server and see which pool members are taking hits now.
 .. IMPORTANT::
 
    Once you are done testing re-enable your disabled pool member.
-
-1.06 - Determine how to architect and deploy multi-tier applications using LTM
-==============================================================================
