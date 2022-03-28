@@ -7,10 +7,9 @@ doing much of this through **tmsh** commands to become familiar with
 the basic syntax, which you may see on the exams. If you get stuck, module
 **3.12 TMOS commands** has the required commands.
 
-301a Objectives covered: 
-   - Prepare base virtual lab environment  
-
 Estimated completion time: **30 minutes**
+
+301a Objectives covered: 
 
 .. toctree::
    :maxdepth: 1

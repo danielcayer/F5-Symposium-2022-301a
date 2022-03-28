@@ -1,13 +1,9 @@
 Lab 4 - Monitors and Status
 ==============================
 
+provious topics:       -  
 In this section you will configure and apply monitors and interpret the results.
 
-301a Objectives covered: 
-   - 1.08 - Determine which configuration objects are necessary for applications that need the original client IP address
-   - 1.09 - Identify the matching order of multiple virtual servers
-       - 
-       - 
        - Given a scenario, determine the appropriate monitor type and
          parameters to use
        - Given a set of parameters, predict an outcome of a monitor status
@@ -16,6 +12,8 @@ In this section you will configure and apply monitors and interpret the results.
          predict the resulting status of the pool member
 
 Estimated completion time: **45 minutes**
+
+301a Objectives covered: 
 
 .. toctree::
    :maxdepth: 1

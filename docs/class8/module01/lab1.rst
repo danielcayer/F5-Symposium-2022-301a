@@ -1,5 +1,5 @@
-Basic set up using TMSH
-=======================
+Basic set up of virtual lab environment using TMSH
+==================================================
 
 TMSH challenge 
 --------------
