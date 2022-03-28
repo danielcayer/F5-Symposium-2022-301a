@@ -15,7 +15,7 @@ Estimated completion time: **45 minutes**
 301a Objectives covered: 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :glob:
 
    lab*
