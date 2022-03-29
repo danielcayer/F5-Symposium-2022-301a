@@ -87,8 +87,8 @@ Browse to **http://10.1.10.115**.
 
 *Q1. Did it work?*
 
-*Update required* HTTP Optimization - RamCache Lab
---------------------------------------------------
+*UPDATE REQUIRED!* HTTP Optimization - RamCache Lab
+---------------------------------------------------
 
 Go to your virtual server and refresh server times. Note the Source Node
 for the pictures of the BIG-IPs. They change depending on where the
@@ -134,8 +134,8 @@ At the CLI go into **tmsh** at the (tmos)# prompt and enter::
 
    show ltm profile ramcache www-opt-caching
 
-Update required? HTTP Optimization - HTTP Compression Lab
----------------------------------------------------------
+*UPDATE REQUIRED?* HTTP Optimization - HTTP Compression Lab
+-----------------------------------------------------------
 
 Browse to **http://10.1.10.100**. On the web page under, **HTTP Request and
 Response Information** select the **Request and Response Headers** link.
