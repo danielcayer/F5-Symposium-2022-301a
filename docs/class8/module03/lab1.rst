@@ -55,42 +55,9 @@ and then import a Key with the same name you could technically attached
 an invalid key to the certificate.
 
 Import the **Key** (Type), named **import\_ssl\_cert**, leave the
-**Password** blank.
+**Password** blank. Select and copy all lines of text between the corresponding *BEGIN* and *END* lines.
 
-**RSA Private Key**::
-
-   -----BEGIN RSA PRIVATE KEY-----
-   MIICXQIBAAKBgQCobsrka60VT1TLfQsamdtQCbvfnGC9ibiTtPjaHXRBpNV70prY
-   rihQqj3pBNlE4dvK0ucF49gGF5HXpKZDqZWXai3AnJhia248FRyT/ezxAjVqamFh
-   c3Lhx5ykSIxWzzw+VBuwTIvg2MS3aE3P/2CQ8MI02/uiLsya0eydw3EyiQIDAQAB
-   AoGBAKPN3BP5hALNfDHKEhp0tw1H6ia19n9eiNtdjQbSzlVo8RXS5DUGar7IUh1k
-   UcjjvtWp9nOL+nMySOvnfKshKhDbB/73NRg7VZ1eZL6K/0vv37KbDSU8KTQssSb3
-   myKxrRVMbxxpPujpUNT3gd6XqdUXyPjWuJOkCGLgVfGhANHhAkEA2ssfpYXgID2a
-   0B+VC+FaAB0GBg5P/oQF3mTPSj460totqGWeXi7beuYXgFYLbn5BNHCsDeVclZMy
-   ws7k4SZiiwJBAMUTSRX3rjeZBpl0zF6xr/JFfw0Fd4lgKDO+hFZvrbhDUYIU9D08
-   ROyH+FViQ0IoV2BtW9IZDtN/GzoroLE/hbsCQQCG5cwaSwOX/UOxZHeJ/qR2A28O
-   Vs69dvsDVpZ0CRBNppWWCSlummdaS/lbeDHOK2vagEmku7CszDf04ok9xGPnAkAl
-   5rubmfLLhoaaZLgZThsEgREaM/71UKTqrq1M4lWKpoe6eMUwMbMfulasNSWyR4fm
-   Z6HNGjybuEpIObPB4vGZAkBo1LKCZXas+mxRfZeucfzPLOx5a8XmwtV57br+ivnK
-   n0OIrSExckYHeeWb4sFl8Y/S85yyBqHS5q5v9s/x2fvp
-   -----END RSA PRIVATE KEY-----
-
-Import the certificate.  Type **Certificate** and named **import\_ssl\_cert**
-
-**Certificate**::
-
-   -----BEGIN CERTIFICATE-----
-   MIIBuzCCASQCCQCTVAeV4noavTANBgkqhkiG9w0BAQUFADAiMSAwHgYDVQQDExds
-   aW51eDMyc2VydmVyMS5mNXNlLmNvbTAeFw0xMDA2MTkyMTI2NTZaFw0yMDA2MTYy
-   MTI2NTZaMCIxIDAeBgNVBAMTF2xpbnV4MzJzZXJ2ZXIxLmY1c2UuY29tMIGfMA0G
-   CSqGSIb3DQEBAQUAA4GNADCBiQKBgQCobsrka60VT1TLfQsamdtQCbvfnGC9ibiT
-   tPjaHXRBpNV70prYrihQqj3pBNlE4dvK0ucF49gGF5HXpKZDqZWXai3AnJhia248
-   FRyT/ezxAjVqamFhc3Lhx5ykSIxWzzw+VBuwTIvg2MS3aE3P/2CQ8MI02/uiLsya
-   0eydw3EyiQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAH1e+FXvNOnKlP5RO5wKVjG0
-   C8F4Xww462beL2LeYZvV3ZjDoTUU0CNkkOnOKMbLkaiTICpBdd836sIiloAyV8M1
-   2YZwxgwP/fV4ycTjHUnloEBmmmBVmW3M5DzLGA1k9cB1dUly5koIoRE9mYRWm9V2
-   ZzYkbZf96KMh8zH47R4y
-   -----END CERTIFICATE-----
+Import the certificate.  Type **Certificate** and named **import\_ssl\_cert**.  Select and copy all lines of text between the corresponding *BEGIN* and *END* lines.
 
 *Q1. What is the common name of your imported certificate and when does
 it expire?*
@@ -120,8 +87,8 @@ Browse to **http://10.1.10.115**.
 
 *Q1. Did it work?*
 
-HTTP Optimization - RamCache Lab
---------------------------------
+*Update required* HTTP Optimization - RamCache Lab
+--------------------------------------------------
 
 Go to your virtual server and refresh server times. Note the Source Node
 for the pictures of the BIG-IPs. They change depending on where the
@@ -167,8 +134,8 @@ At the CLI go into **tmsh** at the (tmos)# prompt and enter::
 
    show ltm profile ramcache www-opt-caching
 
-HTTP Optimization - HTTP Compression Lab
-----------------------------------------
+Update required? HTTP Optimization - HTTP Compression Lab
+---------------------------------------------------------
 
 Browse to **http://10.1.10.100**. On the web page under, **HTTP Request and
 Response Information** select the **Request and Response Headers** link.

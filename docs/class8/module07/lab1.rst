@@ -40,6 +40,9 @@ Browse to **https://10.1.10.245**
 2.02 - Determine how to secure virtual servers
 ==============================================
 
+Leveraging HTTP Profiles
+------------------------
+
 Here you are going to perform some custom profile alterations to help
 secure the web site. You are going to make sure hackers cannot see error
 codes returned, scrub the response headers of extraneous and potentially

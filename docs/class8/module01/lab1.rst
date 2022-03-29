@@ -57,25 +57,33 @@ Here are example TMSH command to help you:
 Command examples for networking::
 
    create net vlan <vlan-name> interfaces add { <interface> { untagged } }
-
    create net self <ip_name> address <ip/mask> vlan <vlan_name>
 
+   # Client-side networking
+   create net vlan client_vlan interfaces add { 1.1 { untagged } }
+   create net self client_ip address 10.1.10.245/24 vlan client_vlan
+
+   # Server-side networking
+   create net vlan server_vlan interfaces add { 1.2 { untagged } }
+   create net self server_ip address 10.1.20.245/24 vlan server_vlan
+
+   # Default Route
    create net route def_gw network 0.0.0.0/0 gw 10.1.10.1
 
 Command example for creating pool::
 
    create ltm pool <pool name> members add { <ip:port> <ip:port> <etc> } monitor http
+   create ltm pool www_pool members add { 10.1.20.11:80 10.1.20.12:80 10.1.20.13:80 } monitor http
 
 Command example for creating a standard virtual server::
 
   create ltm virtual <vs name> destination <ip:port> pool <pool name> ip-protocol tcp source-address-translation { type automap }
+  create ltm virtual www_vs destination 10.1.10.100:80 pool www_pool ip-protocol tcp source-address-translation { type automap }
 
 Write your configuration to disk and create an archive::
 
    save sys config
    save sys ucs lab1-base-config
-
-.. NOTE:: The tmsh commands to build the base configuration can be found in **Module 3.12**.
 
 Log on to the BIG-IP WebUI and verify your virtual server is **Available** (green circle).
 

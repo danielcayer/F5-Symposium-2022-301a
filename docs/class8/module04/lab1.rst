@@ -1,8 +1,14 @@
 1.06 - Determine how to architect and deploy multi-tier applications using LTM
-==============================================================================
+===============================================================================
+
+__TO BE COMPLETED
+-----------------
 
 1.07 - Determine between packet based versus connection based load balancing
 ============================================================================
+
+__TO BE COMPLETED ALSO
+----------------------
 
 1.08 - Determine which configuration objects are necessary for applications that need the original client IP address
 ====================================================================================================================
