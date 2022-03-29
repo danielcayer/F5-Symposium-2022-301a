@@ -288,8 +288,13 @@ refresh the browser page.
 
    Re-enable the pool members before continuing.
 
-(Optional) Default Monitors
----------------------------
+Monitors
+--------
+
+We will configure, assign and test various monitors.
+
+Default Monitors
+~~~~~~~~~~~~~~~~
 
 You will be setting up a default monitor to test any node created. You
 can also choose to use custom monitors and monitor on a per node basis.
@@ -320,8 +325,8 @@ Select **Statistics > Module Statistics > Local Traffic**
 
 *Q3. What are the statuses of your nodes, pool and virtual server?*
 
-(Optional) Content Monitors
----------------------------
+Content Monitors
+~~~~~~~~~~~~~~~~
 
 The default monitor simply tells us the IP address is accessible, but we
 really don't know the status of the particular application the node
@@ -403,8 +408,8 @@ out of the pool.
 
    Be sure to un-reverse your monitor before continuing.
 
-(Optional) Effects of Monitors on Members, Pools and Virtual Servers
---------------------------------------------------------------------
+Effects of Monitors on Members, Pools and Virtual Servers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this task, you will determine the effects of monitors on the status
 of pools members.
@@ -468,8 +473,8 @@ Offline (Enabled)?*
 
    Make sure all virtual servers, pools and pool members are **Available** before continuing.
 
-(Optional) More on status and member specific monitors
-------------------------------------------------------
+More on status and member specific monitors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Go to **Local Traffic > Pool > www\_pool** and then **Member** from the
 top bar and open member **10.1.20.13:80.** Enable the **Configuration:
@@ -493,8 +498,8 @@ tcpdump.
 
 *Q4. Which* **www\_pool** *members was traffic sent to?*
 
-(Optional) Create an Inband monitor and Active monitor with an Up Interval
---------------------------------------------------------------------------
+Create an Inband monitor and Active monitor with an Up Interval
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this exercise, you need to limited the amount of monitor traffic to
 your back in servers. You will use the basic inband monitor, but you
@@ -509,8 +514,8 @@ BIG-IP will mark the member down and will not check the member again for
 
 Create a new custom monitor as the active monitor. Make the monitor an **http** monitor called **active\_http**, with an **Up Interval** of **60** seconds and a **Time Until Up** of **30** second.
 
-(Optional) Assign the Inband monitor to a pool and test
--------------------------------------------------------
+Assign the Inband monitor to a pool and test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You are going to begin by removing the current monitors for the
 **www\_pool** and replacing them with the **my\_inband** monitor only.
@@ -576,18 +581,14 @@ In the **Webmin** tab **Start Apache**.
 *Q8. Did the www\_pool come up within 30 seconds without client traffic?
 What did the tcpdump show?*
 
-(Optional) Create an Extended Application Verification (EAV) monitor
---------------------------------------------------------------------
+Create an Extended Application Verification (EAV) monitor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Log on to the F5 DevCentral site **http://devcentral.f5.com** and go to the
-following link:
+Go to the following link:
 
-https://devcentral.f5.com/codeshare/http-monitor-curl-basic-get
+https://community.f5.com/t5/crowdsrc/http-monitor-curl-basic-get/ta-p/277614
 
-If you don't have an account then create one. You'll be glad you did.
-
-This monitor is also in **Module 3.14** of this document, but working from
-F5 DevCentral is more appropriate.
+If you don't already have a login account then create one. You'll be glad you did.
 
 You will be using this monitor as your new external monitor, a copy of
 the code is on your desktop in a plain text file called

@@ -1,4 +1,4 @@
-LAB 11 - Understanding Impact of Config Changes, user roles and partitions
+Lab 11 - Understanding Impact of Config Changes, user roles and partitions
 ==========================================================================
 
 301a Objectives covered:

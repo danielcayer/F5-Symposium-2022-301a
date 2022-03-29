@@ -1,16 +1,9 @@
-Getting Started with the F5 Certification Program - Created 03/29/19
-====================================================================
-
-|
-|
+Getting Started with the F5 Certification Program
+=================================================
 
 **Congratulations on beginning your adventure into F5 Certifications**
 
-|
-
 The F5 Certified! Program was developed to foster individual professional development through a high-quality, credible technology certification. Certifications are earned by completing a series of exams to verify skills in application delivery, design, installation, and management of F5 technology. These certifications provide a competitive advantage for candidates and employers in the marketplace. There is increasing industry recognition of the integrity, credibility, and quality of F5 certifications and the individuals who obtain them.
-
-|
 
 Introduction
 -------------
@@ -24,7 +17,6 @@ F50000000000
 
 As you read through this guide, you will find resources and embedded links. At the end of the handbook is a list of the full URLs associated with the embedded links.
 
-|
 
 **Certifications Summary**
 

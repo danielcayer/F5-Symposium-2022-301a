@@ -1,11 +1,13 @@
-F5 301A - BIG-IP LTM Specialist Labs - April 2022
-=================================================
+F5 301A - BIG-IP LTM Specialist - Hands On Labs
+===============================================
+
+*Updated April 2022*
 
 These exercises are designed to reinforce the concepts outlined in the
 **LTM Specialist: Architect, Setup, and Deploy** certification blueprint. F5
 certifications exams are designed to required hands-on experience to pass the
 test and these exercises will help you deal with exam questions requiring you
-to interpret configuration and other outputs from the |bip|.
+to interpret configuration and other outputs from the BIG-IP.
 
 Exam blueprints and study guides can be found on the F5 Support site at:
 https://support.f5.com/csp/article/K29900360

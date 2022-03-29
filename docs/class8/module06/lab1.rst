@@ -65,6 +65,7 @@ the data group you built::
       snat [expr int(rand()*255)].[expr int(rand()*255)].[expr int(rand()*255)].[expr int(rand()*254)]
       virtual avr_virtual2
    }
+
    when HTTP_REQUEST {
    # When the HTTP request comes in, select a random user agents and put that agent
    # in the user-agent HTTP header to simulate many different user agents
@@ -81,7 +82,7 @@ the data group you built::
    # After a member has been selected by the load balancing algorithm introduce delay
    # (in milliseconds) on the specified URL or server
       if {([LB::server addr] equals "10.1.20.13") and ([HTTP::uri] equals "/welcome.php")} { after 10}
-	
+
       if {[LB::server addr] equals "10.1.20.13"} {after 20}
    }
 
@@ -119,18 +120,18 @@ click **Finished**.
 |                          |                                         |
 |                          | Methods                                 |
 +--------------------------+-----------------------------------------+
- 
+
 Create a Web Application
 ------------------------
 
-.. NOTE:: 
+.. NOTE::
 
    The **avr_virtual2** destination address is the default gateway of the web servers.
 
 .. list-table::
    :widths: 40 30
 
-   *  - Name 
+   *  - Name
       - **avr_virtual2**
    *  - Destination Address
       - **10.1.20.240**
@@ -144,22 +145,22 @@ Create a Web Application
       - **Auto Map**
    *  - Analytics Profile
       - **custom_analytics**
-   *  - iRules 
+   *  - iRules
       - **delay_server**
-   *  - Default Pool 
+   *  - Default Pool
       - **www_pool**
- 
+
 Create another virtual server using the following information, and then
 click Finished.
 
-.. NOTE:: 
+.. NOTE::
 
    Within the iRule attached to this virtual you are pointing traffic to the virtual server you created above, so avr_virtual2 had to be created first.
 
 .. list-table::
    :widths: 40 30
 
-   *  - Name 
+   *  - Name
       - **avr_virtual1**
    *  - Destination Address
       - **10.1.10.90**
@@ -167,10 +168,10 @@ click Finished.
       - **80 (HTTP)**
    *  - HTTP Profile
       - **http**
-   *  - iRules 
+   *  - iRules
       - **random_client_ip**
 
-Visit the Web Site to Generate AVR Data 
+Visit the Web Site to Generate AVR Data
 ---------------------------------------
 
 Use a web browser to access the virtual server, and then view the

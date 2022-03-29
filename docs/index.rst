@@ -3,7 +3,7 @@ Unofficial - F5 Certification Exam Study Guides and Labs
 
 |
 
-Welcome to the |classbold| last updated on 10/20/20
+Welcome to the |classbold| last updated in April 2022
 
 |
 

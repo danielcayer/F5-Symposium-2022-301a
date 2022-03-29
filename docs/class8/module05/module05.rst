@@ -1,4 +1,4 @@
-Lab 5 - SSL
+Lab 5 - iRules
 ==============
 
 You will use iApps templates, iRules and an analytics profile to build
@@ -8,7 +8,7 @@ errors the iRules and Data Groups have been predefined.
 
 In this module, you will go over the basics of importing/creating certificates and building virtual servers that can encrypt and decrypt traffic.
 
-provious topics:       -  
+provious topics:       -
        - Given a set of application SSL requirements, determine the
          appropriate profiles and profile options
        - Given a scenario determine the steps required to maintain SSL
@@ -16,7 +16,7 @@ provious topics:       -
 
 Estimated completion time: **30 minutes**
 
-301a Objectives covered: 
+301a Objectives covered:
 
 .. toctree::
    :maxdepth: 2
