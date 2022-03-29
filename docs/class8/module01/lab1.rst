@@ -1,8 +1,8 @@
 Basic set up of virtual lab environment using TMSH
 ==================================================
 
-TMSH challenge
---------------
+TMSH Commands
+-------------
 
 Access your BIG-IP, perform a basic build of networking, pool and
 virtual server and establish that your environment is working. **If you
