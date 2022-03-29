@@ -1,4 +1,4 @@
-Lab 7 - (Optional) Application Visibility Reporting (AVR)
+Lab 6 - (Optional) Application Visibility Reporting (AVR)
 =========================================================
 
 Estimated completion time: **30 minutes**
