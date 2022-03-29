@@ -64,8 +64,8 @@ Yes, you should be able to FTP and ping to 10.1.20.15.
 Module - Profiles
 =================
 
-Working with Profiles
----------------------
+Profiles
+--------
 
 Working with profiles
 ~~~~~~~~~~~~~~~~~~~~~
@@ -500,8 +500,8 @@ Module - Virtual Servers and Packet Processing Review
 Lab Preparation and Packet Processing
 -------------------------------------
 
-Open BIG-IP TMSH and TCPDump session 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Open BIG-IP TMSH and TCPDump sessions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Q1. Why are ssh sessions not displayed in connection table?*
 
