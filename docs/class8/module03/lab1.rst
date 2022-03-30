@@ -13,8 +13,8 @@ keys for the server-side SSL processing.
 
 Create the client-side SSL certificate and key.
 
-Go to **System >> File Management >> SSL Certificate List** and select
-**Create** and enter the following information\ **.**
+Go to **System >> Certificate Management >> Traffic Certificate Management >> SSL Certificate List**
+and select **Create** and enter the following information.
 
 +----------------------------+----------------------------+
 | Name                       | **new\_ssl\_cert**         |
@@ -29,9 +29,9 @@ Go to **System >> File Management >> SSL Certificate List** and select
 +----------------------------+----------------------------+
 | Locality                   | **Lab**                    |
 +----------------------------+----------------------------+
-| Country                    | **United States**          |
+| State or Province          | **Washington**             |
 +----------------------------+----------------------------+
-| State                      | **Washington**             |
+| Country                    |  **United States**         |
 +----------------------------+----------------------------+
 | Email                      | **example@f5demo.com**     |
 +----------------------------+----------------------------+
@@ -41,23 +41,24 @@ Go to **System >> File Management >> SSL Certificate List** and select
 By default, a self-sign certificate starts with a Lifetime of 365 days
 and the key type is 2048 bit RSA.
 
-Import the SSL certificate and key below to the BIG-IP to be used for
+Import an external SSL certificate and key to the BIG-IP to be used for
 server-side encryption by selecting **Import**.
 
-You can find the cert and key under the **Lab Guides** link on your
-browser bookmark bar. Look for the **Cert 301a LTM Architect.txt**
-file/link. Open the link and the certificate and key are in there under
-**LAB 5 - SSL**
+You can find the cert and key in A text file located on your Windows
+jumbox's desktop. Look for the **Cert 301a LTM Architect.txt** file.
 
-You may want to import the Key first, as it will validate certificate if
+You may want to import the Key first, as it will validate the certificate if
 your naming both the same. If you were to import the certificate first
 and then import a Key with the same name you could technically attached
 an invalid key to the certificate.
 
-Import the **Key** (Type), named **import\_ssl\_cert**, leave the
-**Password** blank. Select and copy all lines of text between the corresponding *BEGIN* and *END* lines.
+Import the **Key** (Type), with new name **import\_ssl\_cert**, leave the
+**Password** blank. Select *Paste Text* for the *Key Source*, then select and copy all lines of text between the 
+*BEGIN RSA PRIVATE KEY* and *END RSA PRIVATE KEY* lines inclusively.
 
-Import the certificate.  Type **Certificate** and named **import\_ssl\_cert**.  Select and copy all lines of text between the corresponding *BEGIN* and *END* lines.
+Next import the certificate.  Type **Certificate** and new name **import\_ssl\_cert**.
+Select *Paste Text* for the *Certificate Source*, then select and copy all lines of text between the
+*BEGIN CERTIFICATE* and *END CERTIFICATE* lines inclusively.
 
 *Q1. What is the common name of your imported certificate and when does
 it expire?*
@@ -83,25 +84,24 @@ Go to the SSL Server profiles and create a new profile named
 Replace the current default client-side and server-side SSL profiles
 with your new SSL profiles.
 
-Browse to **http://10.1.10.115**.
+Browse to **http://10.1.10.115**
 
 *Q1. Did it work?*
 
-*UPDATE REQUIRED!* HTTP Optimization - RamCache Lab
----------------------------------------------------
+HTTP Optimization - RamCache Lab
+--------------------------------
 
 Go to your virtual server and refresh server times. Note the Source Node
-for the pictures of the BIG-IPs. They change depending on where the
-connection is coming from. The Source Node information is part of the
+for the pictures of the BIG-IPs. They are different depending on which pool
+member is serving the connection. The Source Node information is part of the
 picture.
 
-Go to **Local Traffic > Profiles > Services > Web Acceleration** or 
-**Acceleration > Profiles > Web Acceleration**
+Go to **Local Traffic > Profiles > Services > Web Acceleration**.
 
 Create a new profile named **www-opt-caching** using
 **optimized-caching** as the Parent Profile.
 
-Take all the defaults, no other changes are required.
+Retain all default values, no other changes are required.
 
 *Q1. What resource would be consumed if you increased the* **Cache Size** *setting?*
 
@@ -112,7 +112,7 @@ At the HTTP Profile drop down menu make sure http is selected.
 Under **Acceleration** at **Web** **Acceleration** **Profile** select
 your new caching profile; **www-opt-caching**
 
-Clear the statistics on the **www\_pool**.
+Clear the statistics for the **www\_pool**.
 
 Browse to **http://10.1.10.100**. Refresh the main web page several times.
 
@@ -125,7 +125,7 @@ from the **Statistics Type** drop down menu select **Profiles Summary**
 and select the **Web Acceleration** profile view link. Note the
 information.
 
-You can get more detailed information on Web Acceleration profils and cache entries at the
+You can get more detailed information on Web Acceleration profiles and cache entries at the
 CLI level
 
 Log onto the CLI of your BIG-IP via SSH using the root account (root/default.F5demo.com).
@@ -134,16 +134,15 @@ At the CLI go into **tmsh** at the (tmos)# prompt and enter::
 
    show ltm profile ramcache www-opt-caching
 
-*UPDATE REQUIRED?* HTTP Optimization - HTTP Compression Lab
------------------------------------------------------------
+HTTP Optimization - HTTP Compression Lab
+----------------------------------------
 
 Browse to **http://10.1.10.100**. On the web page under, **HTTP Request and
 Response Information** select the **Request and Response Headers** link.
 
 *Q1. Does the browser accept compression?*
 
-Go to Local **Traffic > Profiles > Service > HTTP** **Compression** or
-**Acceleration > Profiles > HTTP Compression**
+Go to **Local Traffic > Profiles > Services > HTTP** **Compression**.
 
 Create a new profile, named **www-compress** using the
 **wan-optimized-compression** default profile.
@@ -164,10 +163,10 @@ profile you just created.
 
 Browse the virtual server web site and on the web page under **Content Examples
 on This Host** select the **HTTP Compress Example** and **Plaintext
-Compress Example** link.
+Compress Example** links.
 
-Now off to **Statistics** on the sidebar, under the **Local Traffic**
-drop down menu select **Profiles Summary**
+Now off to **Statistics** on the sidebar, under the **Module Statistics > Local Traffic**
+drop down menu select **Profiles Summary** for the *Statistics Type*.
 
 Select the **View** link next to the **HTTP Compression** profile type
 
@@ -199,11 +198,11 @@ button.
 
 Create a new persistence profile named **my-src-persist** with a
 **Persistence Type** of **Source Address Affinity** and set the
-**Timeout** to **120** seconds and leave **Mask: None**
+**Timeout** to **120** seconds and leave **Prefix Length: None**
 
 .. NOTE:: 
 
-   The **Mask: None** defaults to **255.255.255.255** which means each new IP address will create a new
+   The **Prefix Length: None** defaults to **255.255.255.255** which means each new IP address will create a new
    persistence record.
 
 Now let's attach the new persistence profile to the **www\_vs** virtual
@@ -227,6 +226,10 @@ Go to **Statistics > Module Statistic > Local Traffic** and select
 
 In this window, you can watch you persistence records. You may want to
 set **Auto Refresh** to 20 seconds.
+
+Or use the corresponding *TMSH* command::
+
+   show ltm persistence persist-records
 
 In another BIG-IP GUI window go to **www\_pool** and clear the member
 statistics.
@@ -337,7 +340,7 @@ HTTP monitor called **www_test**.
 
 .. NOTE:: In case you were wondering, the receive string is NOT case sensitive.
  
-   By default, in v11.x (which you are being tested on) the default HTTP monitor uses HTTP v1.0.  
+   By default, the HTTP monitor uses HTTP v1.0.
    If you application required HTTP 1.1 you would require a different send string, something like
    **GET /basic/ HTTP/1.1 \\r\\n Host: <host name>\\r\\n\\r\\n**.
    
@@ -365,6 +368,8 @@ your virtual server?*
 Just for fun **Reverse** the monitor. Now when **200 OK** is returned it
 indicates the server is not responding successfully.
 
+.. NOTE:: The monitor might need to be removed from the pool before it can be modified.
+
 *Q3. What is status of your pool and virtual server now?*
 
 You can see where this would be useful if you were looking for a 404
@@ -381,14 +386,14 @@ Effects of Monitors on Members, Pools and Virtual Servers
 In this task, you will determine the effects of monitors on the status
 of pools members.
 
-Create **mysql** monitor for testing.
+Create a **mysql** monitor for testing.
 
 Go to **Local Traffic > Monitors** and select **Create**.
 
 +----------------------+------------------+
 | **Name**             | mysql\_monitor   |
 +======================+==================+
-| **Parent Monitor**   | mysql            |
+| **Parent Monitor**   | MySQL            |
 +----------------------+------------------+
 | **Interval**         | 15               |
 +----------------------+------------------+
@@ -440,8 +445,8 @@ Offline (Enabled)?*
 
    Make sure all virtual servers, pools and pool members are **Available** before continuing.
 
-More on status and member specific monitors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Member specific monitors
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Go to **Local Traffic > Pool > www\_pool** and then **Member** from the
 top bar and open member **10.1.20.13:80.** Enable the **Configuration:
@@ -451,7 +456,11 @@ Advanced** menus.
 it?*
 
 In **Health Monitors** select **Member Specific** and assign the
-**http** monitor and **Update.**
+**https** monitor and **Update.**
+
+.. HINT::
+
+   You're intentionally misconfiguring an HTTPS probe to port 80 on this pool member...
 
 Go to the **Network Map**.
 
@@ -465,6 +474,10 @@ tcpdump.
 
 *Q4. Which* **www\_pool** *members was traffic sent to?*
 
+.. WARNING::
+
+   Make sure all virtual servers, pools and pool members are **Available** before continuing.
+
 Create an Inband monitor and Active monitor with an Up Interval
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -473,19 +486,18 @@ your back in servers. You will use the basic inband monitor, but you
 would like the servers to come up faster than default of 5 minutes. 
 You will combine Inband and Active monitors to accomplish this.
 
-Create an inband monitor named **my\_inband**.  Use all the defaults.
+Create an inband monitor named **my\_inband**.  Select *Inband* for the *Type* and retain all the defaults.
 
 Note the 300 second retry timer, after 3 failures in a 30 second period the
 BIG-IP will mark the member down and will not check the member again for
 5 minutes.
 
-Create a new custom monitor as the active monitor. Make the monitor an **http** monitor called **active\_http**, with an **Up Interval** of **60** seconds and a **Time Until Up** of **30** second.
+Create a new custom monitor as the active monitor. Make the monitor an **http** monitor called **active\_http**, select **Advanced** for the *Configuration*, select **Enabled** for the *Up Interval* with an **Up Interval** of **60** seconds and a **Time Until Up** of **30** seconds.
 
 Assign the Inband monitor to a pool and test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You are going to begin by removing the current monitors for the
-**www\_pool** and replacing them with the **my\_inband** monitor only.
+Remove the current monitors for the **www\_pool** and replacing them with the **my\_inband** monitor only.
 
 Go to the **www\_pool** and remove all monitors and **Update**. Your
 pool members show now be **Unchecked**.
@@ -503,7 +515,7 @@ Let's simulate a failure. Open a new browser tab to
 back-end server::
 
    Username: root 
-   Password: default.F5demo.com
+   Password: default
 
 Under **Servers** on the side-bar, select the **Apache Webserver** link.
 In the upper right corner select the **Stop Apache** link. This will

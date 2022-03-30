@@ -25,11 +25,11 @@ Window 2::
 Verify your virtual server is available and then browse to
 **https://10.1.10.115**. View the TCPDUMPs.
 
-*Q1. Did site work? Why didn't you need to SNAT? Did you need SSL
+*Q1. Did site work? Did you try enabling SNAT? Did you need SSL
 profiles?*
 
-*Q2. Could you use L7 iRules or profiles to view or modify the request or
-response? Why or why not?*
+*Q2. Could you use L7 iRules or profiles to view or modify the HTML
+request or response? Why or why not?*
 
 Modify **secure\_vs** to use the HTTP (80) **www\_pool**.
 
@@ -46,14 +46,14 @@ Browse to **https://10.1.10.115** and observe the tcpdump.
 HTTP profile?*
 
 On the **secure\_vs** in the virtual server **Resources** section enable
-**cookies** as the **Default Persistence Profile** and then **Update**.
+**cookie** as the **Default Persistence Profile** and then **Update**.
 
 *Q5. Did it work? What was needed to add cookie persistence?*
 
-Browse to **https://10.1.10.115/** scroll and select **Display Cookie** in
-the **HTTP Request and Response Information** section on the web page.
+Browse to **https://10.1.10.115/** scroll and click **Request and Response Headers**
+in the **HTTP Request and Response Information** section on the web page.
 
-*Q6. What nodes do the pictures come from? What is the name of the cookie
+*Q6. Which node do the pictures come from? What is the name of the cookie
 inserted begin with?*
 
 Assign the **secure\_pool** to the **secure\_vs** once again. Browse to
@@ -72,15 +72,15 @@ TCP Profiles
 Set client-side and server-side TCP profiles on your virtual server
 properties.
 
-From the drop-down menus place the **tcp-wan-optimized** profile on the
-client-side and the **tcp-lan-optimized** profile on the server-side.
+From the drop-down menus place the **f5-tcp-wan** profile on the
+client-side and the **f5-tcp-lan** profile on the server-side and click **Update**.
 
-Note the custom boxes in each of the TCP profiles you used.
+Inspect each of the TCP profiles you used. Note the custom boxes. 
 
 *Q1. What is the idle timeout in each profile? Why might you want to
 change it?*
 
-*Q2. What is the Nagle selection in the default TCP, tcp-wan-optimized
-and tcp-lan-optimized profiles? Why might you want to change it?*
+*Q2. What is the Nagle selection in the default TCP, f5-tcp-wan
+and f5-tcp-lan profiles? Why might you want to change it?*
 
 *Q3. What happens if you increase the proxy buffer sizes?*
