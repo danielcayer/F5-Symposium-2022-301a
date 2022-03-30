@@ -7,7 +7,7 @@ configuration parameters on connection distribution to the pool members.
 Ratio Load Balancing
 --------------------
 
-Go to Local **Traffic > Pools** and select **www\_pool** and then
+Go to **Local Traffic > Pools** and select **www\_pool** and then
 **Members** from the top bar or you could click on the **Members** link
 in the **Pool List** screen.
 
@@ -33,6 +33,8 @@ times.
 
 *Q2. How many Total connections has each member taken? Is the ratio of
 connections correct?*
+
+.. HINT:: Consider removing **Persistance** on your virtual server's *Resources* settings...
 
 Now go back and put the pool back to **Round Robin** Load Balancing
 Method
@@ -60,7 +62,7 @@ balancing method is **Round Robin**.
 Set the **Priority Group Activation** to less than **2** Available
 Members.
 
-Select the pool members **10.1.20.11** and **10.1.20.12** and set their
+Select the pool members **10.1.20.11:80** and **10.1.20.12:80** and set their
 **Priority Group** to **10**.
 
 Review your settings and let's see how load balancing reacts now.
