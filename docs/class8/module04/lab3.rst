@@ -64,13 +64,7 @@ are **root/default**. It may take 15-20 seconds to connect.
 
 *Q1. Do you see traffic destined for the for the FTP server? What is the source IP?*
 
-<<<<<<< HEAD
 Imagine a dozen virtual servers using Auto Map. It would be extremely difficult to watch for particular client traffic from a particular virtual server. Not to mention a SNAT IP address can only handle 65535. SNAT pools can make management and debugging a little easier and keep port exhaustion at bay.
-=======
-Imagine a dozen virtual servers using Auto Map. It would be extremely difficult to watch for particular
-client traffic from a particular virtual server. Not to mention a SNAT IP address can only handle 65535. SNAT pools can make
-management and debugging a little easier and keep port exhaustion at bay.
->>>>>>> 7fcaf463addec800209b0a4ddc9a0ab0d33bf0c6
 
 Create a SNAT pool and assign it to the FTP server.
 
