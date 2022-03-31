@@ -13,16 +13,16 @@ When building the FTP application you will use the default
 
 Go to **Local Traffic > Pools** and create a new pool.
 
-.. list-table:: 
+.. list-table::
    :widths: 40 30
 
-   *  - Name 
+   *  - Name
       - **ftp_pool**
-   *  - Health Monitor 
+   *  - Health Monitor
       - **tcp**
-   *  - Address 
+   *  - Address
       - **10.1.20.15**
-   *  - Service Port 
+   *  - Service Port
       - **21**
 
 Go to **Local Traffic > Virtual Servers** and create a new virtual server.
@@ -30,13 +30,13 @@ Go to **Local Traffic > Virtual Servers** and create a new virtual server.
 .. list-table::
    :widths: 40 30
 
-   *  - Name 
+   *  - Name
       - **ftp_vs**
-   *  - Destination Address 
+   *  - Destination Address
       - **10.1.10.100**
-   *  - Service Port 
+   *  - Service Port
       - **21**
-   *  - FTP Profile 
+   *  - FTP Profile
       - **ftp**
    *  - Source Address Translation
       - **Auto Map**
@@ -47,7 +47,7 @@ Verify your FTP virtual server and pool are **Available**.
 
 Open up a terminal window and SSH to the BIG-IP::
 
-   ssh root@10.1.1.4 
+   ssh root@10.1.1.4
    Password: default.F5demo.com
 
 Or use PuTTY::
@@ -65,10 +65,7 @@ are **root/default.F5demo.com**. It may take 15-20 seconds to connect.
 
 *Q1. Do you see traffic destined for the for the FTP server? What is the source IP?*
 
-Imagine a dozen virtual servers using 
-using Auto Map. It would be extremely difficult to watch for particular
-client traffic from a particular virtual server. Not to mention a SNAT IP address can only handle 65535. SNAT pools can make
-management and debugging a little easier and keep port exhaustion at bay.
+Imagine a dozen virtual servers using Auto Map. It would be extremely difficult to watch for particular client traffic from a particular virtual server. Not to mention a SNAT IP address can only handle 65535. SNAT pools can make management and debugging a little easier and keep port exhaustion at bay.
 
 Create a SNAT pool and assign it to the FTP server.
 

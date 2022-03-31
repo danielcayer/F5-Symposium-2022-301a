@@ -22,8 +22,7 @@ Use tcpdump to monitor traffic from the client (10.1.10.51) destined to
 
    tcpdump -nni client_vlan host 10.1.10.51 and 10.1.10.100
 
-Open a second PuTTY/terminal window (window2) to BIG-IP and use **tmsh** to display the
-connection table.
+Open a second PuTTY/terminal window (window2) to BIG-IP and use **tmsh** to display the connection table.
 
 .. code-block:: bash
 
@@ -134,9 +133,7 @@ Server** and select **Create**.
 
 Don't forget to hit **Finished.**
 
-You were not required to enter the source addresses allowed. Go to your new virtual
-server and look at the **Source** configuration to see what the default is for 
-source addresses allowed.
+You were not required to enter the source addresses allowed. Go to your new virtual server and look at the **Source** configuration to see what the default is for source addresses allowed.
 
 Testing Virtual Server Packet Processing Behavior
 -------------------------------------------------
@@ -200,14 +197,13 @@ ports should be allowed and all protocols should be allowed.
 *Q2. What is the status of your new virtual server? Why?*
 
 Of course we are not going anywhere unless we install a route to the
-**10.1.20.0/24** network. From a command/terminal window on your jumpbox enter the
-add route command.  
+**10.1.20.0/24** network. From a command/terminal window on your jumpbox enter the add route command.
 
 Windows requires elevated priveleges, click on **Start**, right click on **Command Prompt**,
 select **Run as Administrator**, select **Yes** at the pop-up::
 
    route add 10.1.20.0 mask 255.255.255.0 10.1.10.245
-   
+
 Linux (enter the user password when prompted)::
 
    sudo route add -net 10.1.20.0/24 gw 10.1.10.245
@@ -217,7 +213,7 @@ Enter **f5DEMOs4u** if prompted for a password.
 Verifiy your route has been added (works for Windows and Linux)::
 
    netstat -r
-   
+
 Open up statistics for **forward-to-servernet** and from the jumpbox terminal window test access to the
 10.1.20.0/24 subnet:
 
@@ -266,7 +262,7 @@ Browse to **https://10.1.10.95**.
 
 DNS is running to the LAMP server.  SSH or PuTTY to 10.1.1.252 (LAMP server).
 In the LAMP terminal window::
- 
+
    dig @10.1.10.95 hackazon.f5demo.com
 
 *Q4. Did it work? Why not and how would you fix it?*

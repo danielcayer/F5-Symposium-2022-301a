@@ -75,7 +75,7 @@ properties.
 From the drop-down menus place the **f5-tcp-wan** profile on the
 client-side and the **f5-tcp-lan** profile on the server-side and click **Update**.
 
-Inspect each of the TCP profiles you used. Note the custom boxes. 
+Inspect each of the TCP profiles you used. Note the custom boxes.
 
 *Q1. What is the idle timeout in each profile? Why might you want to
 change it?*
