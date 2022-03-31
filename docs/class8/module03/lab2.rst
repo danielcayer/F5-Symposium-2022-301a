@@ -54,7 +54,7 @@ redundancy and load.  You would traffic to be distributed t0 10.1.20.13 only dur
 
 .. NOTE::
 
-   Remove any caching profiles from the www\_vs virtual server (10.1.10.100).
+   Remove all *HTTP Compression* and *Web Acceleration* profiles from the www\_vs virtual server (10.1.10.100).
 
 Go to the **www\_pool** **Members** section. Make sure the load
 balancing method is **Round Robin**.
@@ -73,18 +73,12 @@ Select the **Statistics** tab, reset the pool statistics, browse to
 *Q1. Are all members taking connections? Which member isn't taking
 connections?*
 
-Let's simulate a maintenance window or an outage by disabling a pool
+Simulate a maintenance window or an outage by disabling pool
 member **10.1.20.11:80** in the highest priority group. This should
 cause low priority group to be activated, since number of active members
 in our high priority group has dropped below 2.
 
-*Q2. Is the lower priority group activated and taking connections?*
-
-Select a member in the **Priority Group** 10 and **Disable** that pool
-member.
-
-Once again, select **Statistics**, reset the pool statistics, browse to the
-virtual server and see which pool members are taking hits now.
+*Q2. Is the lower priority group activated and now taking connections?*
 
 .. IMPORTANT::
 
