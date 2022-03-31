@@ -56,9 +56,3 @@ You should be redirected to the HTTPS virtual server.
 As you can see very small iRules can make a very big difference. On the
 exam, you may be asked to identify the iRule that would best solve an
 issue. So, you should be familiar with basic iRules syntax.
-
-1.11 - Describe how to deploy applications using iApp templates
-===============================================================
-
-Using iApps
------------

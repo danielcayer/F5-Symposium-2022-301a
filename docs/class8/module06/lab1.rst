@@ -1,5 +1,5 @@
-(Optional) Working with Analytics (AVR)
-=======================================
+Working with Analytics (AVR)
+============================
 
 You will use an analytics profile that will be used to test Application Visibility and
 Reporting (aka Analytics). In interest of time and to avoid typing
