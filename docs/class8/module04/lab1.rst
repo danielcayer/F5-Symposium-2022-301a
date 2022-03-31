@@ -71,19 +71,18 @@ watch the FTP pool member::
 
   tcpdump -nni server_vlan host 10.1.20.15
 
-From a Linux terminal window FTP to 10.1.10.100. The logon credentials
-are **root/default.F5demo.com**. It may take 15-20 seconds to connect.
+From a command prompt on your Windows Jumpbox, FTP to 10.1.10.100. The logon credentials
+are **root/default**. It may take 15-20 seconds to connect.
 
 *Q1. Do you see traffic destined for the for the FTP server? What is the source IP?*
 
-Imagine a dozen virtual servers using 
-using Auto Map. It would be extremely difficult to watch for particular
+Imagine a dozen virtual servers using Auto Map. It would be extremely difficult to watch for particular
 client traffic from a particular virtual server. Not to mention a SNAT IP address can only handle 65535. SNAT pools can make
 management and debugging a little easier and keep port exhaustion at bay.
 
 Create a SNAT pool and assign it to the FTP server.
 
-Go to **Address Translation** on the sidebar and select **SNAT Pool List**
+Go to **Local Traffic > Address Translation** on the sidebar and select **SNAT Pool List**
 and create a new SNAT pool named **SNATpool\_249** with **10.1.20.249**
 as a member.
 
@@ -92,13 +91,12 @@ as a member.
 Go to the **ftp\_vs** and change the **Source Address Translation** to
 the **SNATpool\_249** pool.
 
-Let's tried the tcpdump we did earlier, but have it limited to the pool
+Let's try the tcpdump we did earlier, but have it limited to the pool
 member and SNAT pool IP::
 
    tcpdump -nni server_vlan host 10.1.20.15 and 10.1.20.249
 
-Now there is no extraneous traffic being seen. Open a terminal window
-and ftp to **10.1.10.100** and log on to the ftp server. User: **root**
+Now there is no extraneous traffic being seen. From the command prompt, ftp to **10.1.10.100** and log on to the ftp server. User: **root**
 Password: **default**
 
 *Q3. What is the client IP that shows up in the tcpdump?*
@@ -108,7 +106,7 @@ connection table::
 
    show sys connection
 
-Find the connection with your client IP 10.1.10.51 and the SNAT pool IP.
+Find the connection with your client IP 10.1.10.199 and the SNAT pool IP 10.1.20.249.
 
 *Q4. What are the ephemeral port numbers on your client-side source IP
 and server-side source IP?*
@@ -127,12 +125,12 @@ to it via the out-of-band management network at **10.1.1.252**.
 On the BIG-IP, add a new self IP address named **server\_gw** to the VLAN
 **server\_vlan**, with an IP address of **10.1.20.240** and netmask of **255.255.255.0**
 
-From the jumpbox, SSH to the LAMP server at **10.1.1.252**. You can open PuTTY, load the LAMP (10.1.1.252) server profile and SSH to the LAMP server or open a terminal window and **ssh root@10.1.1.252**.  The username is **f5** no other credentials are required, it may take up to 30 seconds to login.
+From the jumpbox, SSH to the LAMP server at **10.1.1.252**. You can open PuTTY, load the LAMP (10.1.1.252) server profile and SSH to the LAMP server or open a terminal window and **ssh root@10.1.1.252**.  It may take up to 30 seconds for the prompt to become responsive when you attempt to login.
 
-Once logged in, change yourself to root::
+Credntials::
 
-   su root
-   Password: default.F5demo.com
+   Username: root
+   Password: default
 
 At the command prompt, attempt to hit the Google open DNS server::
 
@@ -140,16 +138,16 @@ At the command prompt, attempt to hit the Google open DNS server::
 
 *Q1. Did the command succeed?*
 
-On the BIG-IP, open the **SNAT List** and select **Create**
+On the BIG-IP, open the **Local Traffic > Address Translation > SNAT List** and select **Create**
 
 Create a new SNAT translation Name: **server\_snat,** used the IP
 address **10.1.10.248** for the Translation and limit the allowed
-ingress traffic to VLAN **server\_vlan**.
+ingress traffic to VLAN **VLAN \/ Tunnel Traffic: Enabled on...: server\_vlan**.
 
 In a BIG-IP terminal window, do a **tcpdump** on the **client\_vlan**,
 limited to the **10.1.10.248** and **8.8.4.4**.
 
-From the LAMP server try the **dig** command again and the try to **ping
+From the LAMP server try the **dig** command again and then try to **ping
 8.8.4.4** from the LAMP server.
 
 *Q2. Did the dig work? What was the source IP?. Did the ping work? What
@@ -162,9 +160,9 @@ From the Linux prompt attempt to FTP to **10.1.10.248**.
 Go to **Statistics >> Module Statistics >> Local Traffic** and select
 **Statistics Type: SNAT Translations** and review the information.
 
-Under **Address Translation** go to the **NAT List** and create a NAT
+Under **Local Traffic > Address Translation** go to the **NAT List** and create a NAT
 named **server\_15\_nat** with a **NAT Address** of **10.1.10.15** and
-an **Origin Address** of **10.1.20.15**.
+an **Origin: Address List** with **Address/Prefix Lenght** set to **10.1.20.15/32** (don't forget to click **Add** before clicking **Finished**).
 
 Attempt to FTP to 10.1.10.15. Attempt to ping 10.1.10.15.
 
