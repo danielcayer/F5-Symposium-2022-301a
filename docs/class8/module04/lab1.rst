@@ -62,3 +62,8 @@ Now put the ClientSSL and ServerSSL profiles back, and change Source Address Tra
 Idenity which device handles specific configuration objects in multi-tiered deployment
 --------------------------------------------------------------------------------------
 
+Which virtual server is handling the SNAT functions?  Does one have to?  
+
+Which virtual server controls persistence?  Does it matter?
+
+Can the ClientSSL functions live on the sni_vs?  What about ServerSSL?  Can they be split between the virtual servers?
