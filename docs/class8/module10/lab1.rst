@@ -26,7 +26,7 @@ the audit log?*
 Limiting SSH access to the BIG-IP
 ---------------------------------
 
-The jumpbox has two IPs, 10.1.1.51 on the management network, 10.1.10.51
+The jumpbox has two IPs, 10.1.1.6 on the management network, 10.1.10.199
 on the client-side network.
 
 Open **System > Platform** and in **SSH IP Allow** > **Specify Range**
@@ -36,7 +36,7 @@ of **10.1.20.0/24**
 
 Change the **Specify Range** to the management network only **10.1.1.0/24**.
 
-Open new SSH sessions to **10.1.1.245** and **10.1.10.245**.
+Open new SSH sessions to **10.1.1.4** and **10.1.10.245**.
 
 *Q2. Were new ssh sessions established?*
 

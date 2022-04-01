@@ -7,26 +7,25 @@ Open BIG-IP TMSH and TCPDump session
 In this task, you will open two SSH sessions to the BIG-IP. One for TMSH
 commands and the other for tcpdump of the client-side network.
 
-Open PuTTY/terminal window (window1) to BIG-IP from the shortcut bar at the
-bottom of the jumpbox.
+Open PuTTY/terminal window to establish an SSH session to BIG-IP from your jumpbox.
 
 .. code-block:: bash
 
-   ssh root@10.1.1.245
+   ssh root@10.1.1.4
    Password: default.F5demo.com
 
-Use tcpdump to monitor traffic from the client (10.1.10.51) destined to
+Use tcpdump to monitor traffic from the client (10.1.10.199) destined to
 **ftp\_vs** (10.1.10.100)
 
 .. code-block:: bash
 
-   tcpdump -nni client_vlan host 10.1.10.51 and 10.1.10.100
+   tcpdump -nni client_vlan host 10.1.10.199 and 10.1.10.100
 
 Open a second PuTTY/terminal window (window2) to BIG-IP and use **tmsh** to display the connection table.
 
 .. code-block:: bash
 
-   ssh root@10.1.1.245
+   ssh root@10.1.1.4
    Password: default.F5demo.com
 
    tmsh
@@ -37,7 +36,7 @@ At the TMOS prompt **(tmos)#**
 
    show sys connection
 
-Do you see any connections from the jumpbox 10.1.1.51 to 10.1.1.245:22?
+Do you see any connections from the jumpbox 10.1.1.6 to 10.1.1.4:22?
 
 *Q1. Why are the ssh management sessions not displayed in connection
 table?*
@@ -47,10 +46,10 @@ Establish ftp connection
 
 In this task you will open a third terminal window and establish an FTP
 session through the **ftp\_vs** virtual server. With the connection
-remaining open you will view the results in window1 (tcpdump) and
-window2 (tmsh).
+remaining open you will view the results in your other windows with the tcpdump and
+tmsh commands.
 
-Open a third command/terminal window (window3).
+Open a command prompt on your Windows jumpbox and issue the following FTP command.
 
 .. code-block:: bash
 
@@ -59,7 +58,7 @@ Open a third command/terminal window (window3).
 It may take 15 to 20 seconds for the logon on prompt, just leave it at
 prompt to hold the connection open.
 
-In window 1 you should see something similar to the tcpdump captured
+In the tcpdump window you should see something similar to the tcpdump captured
 below.
 
 .. image:: /_static/201L/201ex211t2a-tcpdump.png
@@ -67,13 +66,13 @@ below.
 *Q1. In the tcpdump above, what is client IP address and port and the
 server IP address port?*
 
-In window2 (tmsh) run the **show sys conn** again, but strain out the
+In the tmsh windows, run the **show sys conn** again, but strain out the
 noise of other connections (mirrored and selfIP) by just looking at
 connections from your jumpbox.
 
 .. code-block:: bash
 
-   sho sys conn cs-client-addr 10.1.10.51
+   show sys conn cs-client-addr 10.1.10.199
 
 The connection table on window2 will show the client-side and
 server-side connection similar to below:
@@ -90,12 +89,11 @@ above?*
    You may have to review the configuration of **ftp\_vs** to determine
    the answer to question 3.
 
-In this task you will create a wildcard virtual server and pool, test and observe various types of traffic under different configurations to determine how virtual servers
-process new inbound connections. You will be using tcpdump from window1,
-virtual server statistics, as well as a browser to determine behavior.
-
 Create additional Virtual Servers
 ----------------------------------
+
+In this task you will create a wildcard virtual server and pool, test and observe various types of traffic under different configurations to determine how virtual servers
+process new inbound connections. You will be using tcpdump in one window, and a browser to view the corresponding virtual server statistics.
 
 Create **wildcard\_vs** **10.1.10.100:\*** with a **TCP** profile, **Automap** and a
 pool named **wildcard\_pool** with the following member **10.1.20.11:\***
@@ -164,7 +162,7 @@ Modify the **wildcard\_vs** to only allow connections from a **Source**
 of 10.1.10.0/24.
 
 .. NOTE::
-   The source address your jumpbox should be connecting from is 10.1.10.51
+   The source address your jumpbox should be connecting from is 10.1.10.199
 
 Browse to http://10.1.10.100
 
@@ -189,26 +187,24 @@ network inserted.
 
 Create a new **Forward (IP)** type of virtual server named
 **forward-to-servernet** that only allows **Source** IPs from the
-**10.1.10.0/24**, to the destination **Network** **10.1.20.0/24**, all
-ports should be allowed and all protocols should be allowed.
+**10.1.10.0/24**, to the **Destination Address** **10.1.20.0/24**, all
+ports should be allowed, all protocols should be allowed and **Automap** must be selected.
 
 *Q1. What happens if we don't change the Protocol from TCP?*
 
 *Q2. What is the status of your new virtual server? Why?*
 
 Of course we are not going anywhere unless we install a route to the
-**10.1.20.0/24** network. From a command/terminal window on your jumpbox enter the add route command.
+**10.1.20.0/24** network. From a command prompt window on your jumpbox enter the add route command.
 
-Windows requires elevated priveleges, click on **Start**, right click on **Command Prompt**,
+Windows requires elevated priveleges. Click on the Windows **Start** icon at the bottom left of the desktop to find the **Command Prompt** application, right click on **Command Prompt**,
 select **Run as Administrator**, select **Yes** at the pop-up::
 
    route add 10.1.20.0 mask 255.255.255.0 10.1.10.245
 
-Linux (enter the user password when prompted)::
+On a Linux jumpbox, the corresponding command is (enter the user password when prompted)::
 
    sudo route add -net 10.1.20.0/24 gw 10.1.10.245
-
-Enter **f5DEMOs4u** if prompted for a password.
 
 Verifiy your route has been added (works for Windows and Linux)::
 
@@ -218,7 +214,7 @@ Open up statistics for **forward-to-servernet** and from the jumpbox terminal wi
 10.1.20.0/24 subnet:
 
   - ping 10.1.20.11
-  - nslookup hackzon.f5demo.com 10.1.20.12 (windows) or dig @10.1.20.12 hackazon.f5demo.com (linux)
+  - nslookup lamp2.f5demo.com 10.1.20.12 (windows) or dig @10.1.20.12 f5demo.com (linux)
   - http://10.1.20.13 (from a browser) or curl 10.1.20.13 (linux)
 
 By the way, if you take a look at the iApp templates you will find one
@@ -247,8 +243,8 @@ profiles on this virtual server a virtual server type of **Performance (Layer 4)
 be more efficient, Finally configure **transparent-pool** as the virtual server pool.
 
 .. NOTE::
-   Open the Advanced menu and notice that Address Translation is still enabled, but
-   Port Translation is not.
+   Open the Advanced menu and review the Address Translation and
+   Port Translation settings.
 
 Test your virtual server.
 
@@ -263,7 +259,7 @@ Browse to **https://10.1.10.95**.
 DNS is running to the LAMP server.  SSH or PuTTY to 10.1.1.252 (LAMP server).
 In the LAMP terminal window::
 
-   dig @10.1.10.95 hackazon.f5demo.com
+   dig @10.1.10.95 lamp2.f5demo.com
 
 *Q4. Did it work? Why not and how would you fix it?*
 
