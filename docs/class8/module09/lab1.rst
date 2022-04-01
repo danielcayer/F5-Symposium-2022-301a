@@ -17,7 +17,7 @@ devices.
 Prepare bigip01
 ~~~~~~~~~~~~~~~
 
-On **bigip01.f5demo.com** (10.1.1.245), this should already have been
+On **bigip01.f5demo.com** (10.1.1.4), this should already have been
 accomplished. You will be using interface 1.3 VLAN 30 and IP 10.1.30.245
 for Network Failover and ConfigSync and Mirroring.
 
