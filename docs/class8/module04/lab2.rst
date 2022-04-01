@@ -15,4 +15,4 @@ The help indicates that Datagram LB when enabled load balances UDP traffic packe
 Demonstrate when to use connection based load balancing
 -------------------------------------------------------
 
-Most applications are configured with load balancing connection based instead of packet-by-packet.  TCP based applications will be balanced based on their connections due to the requirements of the SYN, SYN ACK, ACK handshake. 
+Most applications are configured with load balancing connection based instead of packet-by-packet.  TCP based applications will be balanced based on their connections due to the requirements of the SYN, SYN ACK, ACK handshake.
