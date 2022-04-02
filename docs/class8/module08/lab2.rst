@@ -4,10 +4,7 @@
 __TO BE COMPLETED
 -----------------
 
-
----------------------
-
-This video walks you through the steps to upgrade the BIG-IP HA Pair
+The video below walks you through the steps to upgrade the BIG-IP HA Pair
 
 The video covers.
 
