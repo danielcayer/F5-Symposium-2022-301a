@@ -3,3 +3,13 @@
 
 __TO BE COMPLETED
 -----------------
+
+
+---------------------
+
+This video walks you through the steps to upgrade the BIG-IP HA Pair
+
+https://www.youtube.com/watch?v=wcaBq-_zjbs
+
+
+
