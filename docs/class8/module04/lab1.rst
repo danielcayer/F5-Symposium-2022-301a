@@ -66,4 +66,6 @@ Which virtual server is handling the SNAT functions?  Does one have to?
 
 Which virtual server controls persistence?  Does it matter?
 
-Can the ClientSSL functions live on the sni_vs?  What about ServerSSL?  Can they be split between the virtual servers?
+Can the ClientSSL functions be on the sni_vs?  What about ServerSSL?  Can they be split between the virtual servers?
+
+How does this change if the virtual servers are on 2 separate instances of BIG-IP?
