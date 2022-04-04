@@ -259,12 +259,14 @@ Browse to **https://10.1.10.95**.
 DNS is running to the LAMP server.  SSH or PuTTY to 10.1.1.252 (LAMP server).
 In the LAMP terminal window::
 
-   dig @10.1.10.95 lamp2.f5demo.com
-
+   login as: **root**
+   Password: **default**
+   root@localhost:~# **dig @10.1.10.95 lamp2.f5demo.com**
+   
 *Q4. Did it work? Why not and how would you fix it?*
 
-(Optional) Test Disabled Virtual Servers
-----------------------------------------
+Test Disabled Virtual Servers
+-----------------------------
 
 In this task, you will disable and enable various virtual servers and
 note the behavior.
@@ -281,12 +283,11 @@ Open **Local** **Traffic > Virtual Servers** and hover over status icons.
 
 From window 2 (TMSH) type::
 
-   show ltm virtual
    show ltm virtual www_vs
 
 *Q1. What is the Availability of* **www\_vs**\ *? What is the State?*
 
-*Q2. What symbol is used to represent* **www\_vs** *status?*
+*Q2. In the TMUI GUI, what symbol is used to represent* **www\_vs** *status*?
 
 *Q3. Would you expect browsing to* **http://10.1.10.100** *to work?*
 
@@ -303,7 +304,7 @@ Server statics GUI interface.
 
 Establish ftp connection to **10.1.10.100** and ensure successful login.
 
-- Logon credentials are **root/default.F5demo.com**
+- Logon credentials are **root/default**
 
 Disable **ftp\_vs**.
 
@@ -324,14 +325,14 @@ In this task, you will set the connection limit for the FTP virtual
 server to 1 and note the status and behavior of different connection
 scenarios.
 
-Modify **ftp\_vs** for connection limit of **1**. The **Connection Limit**
+Modify **ftp\_vs** with *connection limit* set to **1**. The **Connection Limit**
 option can be found under the **Advanced** virtual server menu.
 
 Establish ftp connection to **10.1.10.100** and hold the logon open.
 
 *Q1. Does FTP session work?*
 
-*Q2. What is the virtual server symbol and status of* **ftp\_vs**\ **?**
+*Q2. In the TMUI GUI, what is the virtual server symbol and status of* **ftp\_vs**\ **?**
 
 Open another window and establish a second ftp connection to **10.1.10.100**.
 
