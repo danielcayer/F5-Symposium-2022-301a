@@ -11,9 +11,9 @@ Audit logging is disabled by default. **Go to System > Logs > Configuration**.
 
 Notice you can determine by role who is allowed to view the audit logs.
 
-Audit Logging is toward the bottom of the page. **Enable** Audit Logging
+Audit Logging is toward the bottom of the page. **Enable** Audit Logging for the GUI.
 
-In a private browser window, log on to the BIG-IP as **adminuser/password**.
+In a private or incognito browser window, log on to the BIG-IP as **adminuser/password**.
 
 Make a change to the **Description** of the FTP virtual server **ftp\_vs**.
 
@@ -47,16 +47,16 @@ Your customer would like to integrate BIG-IP system messages with
 their central logging system, to be processed by their correlation
 software. They would like you to send mcpd informational messages (to external logging server(s)).
 
-Create a pool with the logging server(s). This will be the destination for
+You will create a pool with the logging server(s). This will be the destination for
 high speed logging. You will be logging to **syslog\_ng** over TCP port **514**.
 You will be using a combination of an inband monitor and an active
 monitor to determine the log server's availability. This monitor will
 combination will reduce network activity and superfluous log messages to
 the syslog server.
 
-Configure the **Logging Pool**.
+Because the syslog server is using the TCP protocol, we can use inband monitors.
 
-Because the syslog server is using the TCP protocol, we can use inband monitors.  Create an **inband** monitor named **syslog\_inband** and use the default configuration.
+Create an **inband** monitor named **syslog\_inband** and use the default configuration.
 
 Create an active **TCP** monitor named **syslog\_active** and set the
 **Up Interval** to **180** seconds.
@@ -91,11 +91,11 @@ the log messages and the protocol to use.
 
 .. NOTE::
 
-   The reason we have to define an HSL destination is because the is no way to assign a protocol to a pool.
+   The reason we have to define an HSL destination is because there is no way to assign a protocol to a pool.
 
 Go to **System > Logs > Configurations > Log Destinations** and create a
 HSL destination named **hsl\_logging\_dest** of a type **Remote
-High-Speed Log** and the pool name is **logging\_pool**
+High-Speed Log** and the pool name is **logging\_pool**.
 
 Formatted Log Destination
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,8 +107,7 @@ Destination you created earlier.
 
 **In Logging Destinations** select **Create** and build a formatted
 destination named **formatted\_dest** with a type of **Remote Syslog**
-and with the **Syslog Format** of **Syslog** and the **High Speed Log
-Destination** set to **hsl\_logging\_dest.**
+and with the **Syslog Format** of **Syslog** and **Forward To** set to **hsl\_logging\_dest**.
 
 Log Publisher and Filtering Messages
 ------------------------------------
@@ -144,7 +143,8 @@ where the BIG-IP runs out of disk space. You are going to send
 informational messages from the MCPd daemon to the published
 destinations.
 
-Go to **System > Log > Configuration > Log Filters** and select Create
+Go to **System > Log > Configuration > Log Filters** and select **Create**
+
    - Name: **my-mcpd-filter**
    - Severity: **Informational**
    - Source: **mcpd**
@@ -155,7 +155,7 @@ Test your logging configuration
 
 Generate and view a **mcpd** event.
 
-SSH to the syslog-ng server at **10.1.1.252** (credentials are **root/default.F5demo.com**)..
+SSH to the syslog-ng server at **10.1.1.252** (credentials are **root/default**)..
 
 Watch the **bigip.log** syslog file for your events::
 
