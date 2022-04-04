@@ -142,6 +142,6 @@ The guide provides detailed step by step information about how to upgrade a Vipr
 
 https://support.f5.com/csp/article/K14166297
 
-Please also review the Viprion vCMP upgrade video
+Please review the Viprion vCMP upgrade video
 
 https://www.youtube.com/watch?v=ti2pOFdY8D0
