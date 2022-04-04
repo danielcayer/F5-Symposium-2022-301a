@@ -34,11 +34,11 @@ server.
 +------------------------------+-------------------------------------------------------------+
 | Name                         | redirect\_to\_secure\_vs                                    |
 +==============================+=============================================================+
-| Destination                  | <same IP as secure\_vs>                                     |
+| Destination                  | 10.1.10.115 (same IP as secure\_vs)                         |
 +------------------------------+-------------------------------------------------------------+
 | Service Port                 | 80 (HTTP)                                                   |
 +------------------------------+-------------------------------------------------------------+
-| Source Address Translation   | None <you don't need this, this traffic is going nowhere>   |
+| Source Address Translation   | None (you don't need this, this traffic is going nowhere)   |
 +------------------------------+-------------------------------------------------------------+
 | iRule                        | \_sys\_https\_redirect                                      |
 +------------------------------+-------------------------------------------------------------+
@@ -49,16 +49,10 @@ WOW! That didn't go too far did it. You just got an error. If you are
 going to redirect the HTTP request you need the HOST and URI information
 and that requires looking into the HTTP protocol.
 
-Test your new virtual by going to **http://10.1.10.115**.
+Change your virtual server's *HTTP Profile (Client)* from **None** to **http** and test your new virtual by going to **http://10.1.10.115**.
 
 You should be redirected to the HTTPS virtual server.
 
 As you can see very small iRules can make a very big difference. On the
 exam, you may be asked to identify the iRule that would best solve an
 issue. So, you should be familiar with basic iRules syntax.
-
-1.11 - Describe how to deploy applications using iApp templates
-===============================================================
-
-Using iApps
------------
