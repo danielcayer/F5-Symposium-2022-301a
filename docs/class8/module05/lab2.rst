@@ -28,3 +28,5 @@ Change the *Service Port* to **HTTPS** and click **Update**. Why are you not abl
     The default value for the **Strict Updates** setting on the iApp's **Properties** tab prevents modification of the corresponding configuration objects.
 
 Go to the iApp's **Reconfigure** tab and review the parameters in the *SSL Encryption* section.
+
+How do you quickly delete every configuration object that was created by an iApp?

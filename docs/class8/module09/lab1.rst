@@ -5,7 +5,7 @@ Base Networking and HA VLAN for DSC (Device Service Cluster)
 ------------------------------------------------------------
 
 You will be creating a high availability cluster using the second BIG-IP
-(bigip2.f5demo.com) in your lab.  You'll begin by prepping **bigip01.f5demo.com** ( your current BIG-IP by creating a high availability VLAN that you will use to pass network polling, configuration changes and mirroring information between the two BIG-IPs.
+(bigip2.f5demo.com) in your lab.  You'll begin by prepping **bigip01.f5demo.com** (your current BIG-IP) by creating a high availability VLAN that you will use to pass network polling, configuration changes and mirroring information between the two BIG-IPs.
 
 .. WARNING::
 
@@ -28,15 +28,14 @@ the Master Control Program.
 Go to you **10.1.30.245** self IP and set **Port Lockdown** to **Allow
 Defaults**. This will ensure the ports we require are open.
 
-Go to **https://10.1.1.246** which is **bigip02.f5demo.com** and login with
-**admin/admin**.
+Go to **https://10.1.1.5** which is **bigip02.f5demo.com** and login with
+**admin/admin.F5demo.com**.
 
 Prepare bigip02
 ~~~~~~~~~~~~~~~
 
-Your second BIG-IP, **bigip02,** has already been licensed and the basic
-setup completed. You need to make sure the BIG-IPs are provisioned the
-same **(LTM and AVR)** and set up the base networking on **bigip02**.
+Your second BIG-IP, **bigip02,** has already been licensed and minimal basic
+setup has been completed. You need to make sure the appropriate base networking is configured on **bigip02**.
 
 +-------------+----------------+------------------------+----------------+---------------+-----------------+------------------+----+
 | Interface   | VLAN name      | Tag (blank untagged)   | Self IP Name   | Self IP       | Mask            | Port Lockdown    |    |
@@ -65,7 +64,7 @@ recommended, but not mandatory, that you renew the BIG-IP self-signed
 certificate with valid information and re-generate the local Device
 Trust certificate.
 
-Under **System > Device Certificate > Device Certificate** select the
+Under **System >> Certificate Management >> Device Certificate Management >> Device Certificate** select the
 **Renew** button.
 
 **Common Name:** <the Hostname of the BIG-IP in the upper left corner>
@@ -123,9 +122,9 @@ device group and place the BIG-IPs in the new group. You will build this
 from bigip01 and sync its good configuration to bigip02.
 
 On **bigip01.f5demo.com**, under **Device Management > Device Trust >
-Peer List** and select **Add**
+Device Trust Members** and select **Add**
 
-**Device IP Address:** <management IP address of the BIG-IP to add>
+**Device IP Address**: **10.1.1.5** <management IP address of the BIG-IP to add>
 
 .. NOTE::
    You could use any Self IP if the out-of-band management interface is not
@@ -137,6 +136,8 @@ trusting.
 Select **Retrieve Device Information**
 
 The certificate information and name from the other BIG-IP should appear
+
+Click **Device Certificate Matches**, verify that the infomation is correct and click **Add Device**.
 
 On each BIG-IP check the other BIG-IP in the Peer Authorities list.
 
@@ -158,7 +159,7 @@ Under **Device Management > Device Group** create a new device group
 named **my\_device\_group** with a type of **Sync-Failover**
 
 Add the members of the group (bigip01 and bigip02) to the **Includes**
-box and check the **Network Failover** setting for the group.
+box and make sure the **Network Failover** *advanced* setting is checked/selected for this group.
 
 Check **Device Groups** on each BIG-IP.
 
@@ -192,13 +193,16 @@ Check each BIG-IP **Device Management > Overview**.
 
 *Q6. Did the configuration synchronize? What, if any, errors do you see?*
 
-You ended up with an error because of configuration dependencies with
+If you performed the AVR lab
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you went through the optional AVR LAB#6, you might have encountered an error because of configuration dependencies with
 **avr2\_virtual**. This is why building you device service cluster early
 is a good idea, but you can't always do that. You could have a device
 cluster pair that you are adding a third BIG-IP. You are going to have
 to correct the error, synchronize and the re-add **avr\_virtual.**
 
-On **bigip01** delete the virtual server **avr\_virtual2.**
+If required, on **bigip01** delete the virtual server **avr\_virtual2.**
 
 *Q7. Any issue with that?*
 
@@ -229,11 +233,14 @@ Ensure **bigip02** is the **Active** BIG-IP. If **bigip01** is the
 **Active** BIG-IP then go to **Device Management >> Traffic Groups**.
 Select **traffic-group-1** and hit the **Force to Standby** button.
 
-Browse to **http://10.1.10.100**?
+Browse to **http://10.1.10.100**.
 
-*Q1. What is the source IP in the* **Request Details**?
+*Q1. What is the source Client IP address in the* **Request Details**? Why?
 
-Browse to **http://10.1.10.115**?
+On bigip01, remove SNAT on your **sercure_vs** virtual server and click **Update**.
+Click the yellow **Changes Pending** warning at the top left of your screen next to the F5 ball and push the configuration from bigip01 to the group. 
+
+Browse to **http://10.1.10.115** again with bigip02 active.
 
 *Q2. What happened? Why?*
 
@@ -242,14 +249,12 @@ The default gateway for the servers in the **secure\_pool** is
 **traffic-group-local-only** in **bigip01** and resides in the
 **bigip\_base.conf**. We need this IP address to float to the active
 BIG-IP upon failover. Because we are changing this from a base IP to a
-floating IP you will encounter an error when trying to sync the configuration. Incremental updates are the default sync method, but sometimes a full overwrite is required.
+floating IP you will encounter an error when trying to sync the configuration.
+Incremental updates are the default sync method, but sometimes a full overwrite is required (BIG-IP will prompt you to confirm when this occurs).
 
 On **bigip01**, open the self IP **server\_gw** (10.1.20.240) and
 assign it to the default floating traffic group **traffic-group-1.**
-Select **Changes Pending** or **Device Management** > **Oveview**.
-
-From the **Overview** page, select **bigip01.f5demo.com**, select **Sync Device to
-Group**, select **Overwrite Configure** and select **Sync**.
+Select **Changes Pending** or **Device Management** > **Oveview**, select **bigip01.f5demo.com** and click **Sync**.
 
 Browse to **http://10.1.10.115**.
 
@@ -277,11 +282,11 @@ example.
 
 Go to your **Active** BIG-IP.
 
-Open you **www\_vs** virtual server and add **my-src-persist** as your
-**Persistence Profile**.
+Open you **www\_vs** virtual server and select **my-src-persist** as your
+**Default Persistence Profile**.
 
-On each BIG-IP go to **Module Statistics > Local Traffic** and bring up
-the **Persistence Record** statistics.
+On each BIG-IP go to **Statistics >> Module Statistics > Local Traffic** and select
+**Persistence Record** for the *Statistics Type*.
 
 Browse to **http://10.1.10.100**.
 
@@ -299,14 +304,14 @@ the **Persistence Record** statistics.
 SSH to your active BIG-IP and view your persistence records. In TMSH run
 the following command::
 
-   show /ltm persistence persistence-records
+   show /ltm persistence persist-records
 
 Note the CLI/TMSH prompt, you can find the sync status and the BIG-IP
 state.
 
 For this lab, if you have any persistence records delete them::
 
-  delete /ltm persistence persistence-records
+  delete /ltm persistence persist-records
 
 Browse to **http://10.1.10.100** and refresh the page few times.
 
@@ -316,7 +321,7 @@ the records are mirrored on each device.
 *Q2. If you had persistence records existing prior to mirroring would
 they appear on the standby box?*
 
-Go to **Device Management > Traffic Groups**. Select the default traffic
+On the active BIG-IP, go to **Device Management > Traffic Groups**. Select the default traffic
 group **traffic-group-1** and check out the **Next Active Device**.
 
 Refresh the web page at **http://10.1.10.100**, and in **traffic-group-1**,
@@ -349,8 +354,8 @@ assign it to, **tg-2**.
 
 *Q1. When you did this, what other virtual servers were assign to tg-2?*
 
-On the **Active** BIG-IP, under **Device Management** select **tg-2**
-note the **Next Active Device** and **Force to Standby**.
+On the **Active** BIG-IP, sync your changes (push from active bigip to group), then go to **Device Management** select **tg-2**,
+note the **Next Active Device** and click **Force to Standby**.
 
 *Q2. What are the states of you BIG-IPs?*
 

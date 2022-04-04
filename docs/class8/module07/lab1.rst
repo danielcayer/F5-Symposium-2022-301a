@@ -17,7 +17,7 @@ SSH to **10.1.10.245**
 
 *Q2. Was ssh successful? Why not?*
 
-Open **Network > Self IPs > 10.1.10.245** and change **Port Lockdown**
+Open **Network > Self IPs > client_ip (10.1.10.245)** and change **Port Lockdown**
 to **Allow Defaults**
 
 SSH to **10.1.10.245**
@@ -28,7 +28,10 @@ Browse to **https://10.1.10.245**
 
 *Q4. What other ports are opened when you select* **Allow Defaults**.
 
-Open **Network > Self IPs > 10.1.10.245** and change Port Lockdown to
+.. HINT::
+   Go to the **Help** tab for the **Network >> Self IPs >> client_ip** page and expand the *Port Lockdown* section for the answer.
+
+Open **Network > Self IPs > client_ip (10.1.10.245)** and change Port Lockdown to
 **Allow Custom** and add **TCP** port **22**
 
 SSH to **10.1.10.245**
@@ -50,8 +53,8 @@ dangerous information and encrypt the persistence cookie to prevent
 tampering.
 
 Obtain the cookie name and information by browsing to
-**https://10.1.10.115/** and open the **Display Cookie**. The cookie name is
-everything in front of the **=** sign. How BIG-IP creates cookies for
+**https://10.1.10.115/** and click the **Request and Response Headers** link.
+The cookie name is everything in front of (to the left of) the **=** sign. How BIG-IP creates cookies for
 Cookie Insert persistence can be found at https://support.f5.com/csp/article/K6917. After reading this article you could craft a cookie to hit a particular server.
 
 *Q1. What is the cookie name? Note the information after the cookie.*
@@ -98,11 +101,6 @@ Now browse to a bad page.
 For example, **https://10.1.10.115/badpage**
 
 *Q4. What is the result?*
-
-Under, **HTTP Request and Response Information** select the **Display
-Cookie** link.
-
-*Q5. What is different from the cookie at the start of the task?*
 
 .. NOTE::
 

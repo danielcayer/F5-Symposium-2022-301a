@@ -1,9 +1,6 @@
 2.04 - Determine how to perform a software upgrade while maintaining application availability
 =============================================================================================
 
-__TO BE COMPLETED
------------------
-
 The video below walks you through the steps to upgrade the BIG-IP HA Pair
 
 The video covers.
