@@ -5,6 +5,8 @@ In this module you will configure BIG-IPs for high availability.  Device Service
 
 Estimated completion time: **30 minutes**
 
+301a Objectives covered:
+
 .. toctree::
    :maxdepth: 1
    :glob:
