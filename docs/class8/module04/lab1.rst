@@ -17,17 +17,17 @@ Start with creating 2 virtual servers with 1 pool each as follows:
     create ltm virtual secure1_vs destination 10.1.5.16:443 ip-protocol tcp persist replace-all-with { cookie } pool secure1_pool profiles add { clientssl serverssl tcp http } source-address-translation { type automap } translate-address enabled translate-port enabled
     create ltm virtual secure2_vs destination 10.1.5.15:443 ip-protocol tcp persist replace-all-with { cookie } pool secure2_pool profiles add { clientssl serverssl tcp http } source-address-translation { type automap } translate-address enabled translate-port enabled
 
-Now we will create a traffic policy by going to **Local Traffic, Policies, Policy List**.  Click on **Create**.
+Now we will create a traffic policy named **sni_routing** by going to **Local Traffic, Policies, Policy List**.  Click on **Create**.
 
     .. image:: /_static/301a/p21.png
         :scale: 80%
 
-Now click on create in the Rules section and configure the first rule as below:
+Now click on **Create** in the Rules section and configure the first rule as below:
 
     .. image:: /_static/301a/p22.png
         :scale: 80%
 
-Now click on create again to create a 2nd rule as follows:
+Now click on **Create** again to create a 2nd rule as follows:
 
     .. image:: /_static/301a/p23.png
         :scale: 80%
@@ -36,7 +36,10 @@ Now create a new virtual server that will be the entry point for the clients:
 
  .. code-block:: tcl
 
-     create ltm virtual sni_vs destination 10.1.10.111:443 ip-protocol tcp persist replace-all-with { ssl } policies replace-all-with { sni_routing } profiles add { tcp }
+     create ltm virtual sni_vs destination 10.1.10.111:443 ip-protocol tcp persist replace-all-with { ssl } policies replace-all-with { sni_routing } profiles add { clientssl serverssl tcp }
+
+.. HINT::
+    Did you **Save and Publish** your new policy?
 
 Now go to the browser on the desktop and go to https://secure1.f5demo.com.
 
@@ -50,13 +53,14 @@ What Pool member did you get?  Why?
 SNAT/persistence/SSL settings in multi-tiered environment
 ---------------------------------------------------------
 
-On the BIG-IP configuration page go to **Local Traffic, Virtual Servers** and select sni_vs virtual server and then click on the Resources Tab.  Change default persistence from SSL to None and click on update.  What happens?
+On the BIG-IP configuration page go to **Local Traffic, Virtual Servers** and select **sni_vs** virtual server and then click on the **Resources** Tab.  Change *Default Persistence Profile* from **ssl** to **None** and click on **Update**.
+From your jumphost, browse to https://secure1.f5demo.com and refresh multiple times. Is persistence still in effect. Why?
 
-Now go to the secure1_vs Resources tab, and select Default Persistence Profile of None.  Start a new instance of Chrome and go to https://secure1.f5demo.com.  Refresh multiple times.  Does it ever change pool members?  Why?
+Now go to the **secure1_vs** *Resources* tab, and set **Default Persistence Profile** to **None**.  Start a new instance of Chrome and go to https://secure1.f5demo.com.  Refresh multiple times.  Does it ever change pool members?  Why?
 
-Now go to the secure1_vs and remove the ClientSSL and ServerSSL Profiles.  Hit the page again.  Why is it failing to load?
+Now go to the **secure1_vs** *Properties* tab and remove the ClientSSL and ServerSSL Profiles.  Hit the page again.  Why is it failing to load?
 
-Now put the ClientSSL and ServerSSL profiles back, and change Source Address Translation to None. Does the connection work now?  What if you add source address translation to the sni_vs Virtual Server?  Now go to https://secure2.f5demo.com which has source address translation enabled, and sni_vs has source address translation enabled.  Does the site still work?  Why?
+Now put the **clientssl** and **serverssl** profiles back, and change *Source Address Translation* to **None**. Does the connection work now?  Go to the **sni_vs** Virtual Server and change *Source Address Translation* from **None** to **Auto Map**. Does https://secure1.f5demo.com work now?  Try https://secure2.f5demo.com which has source address translation enabled with **sni_vs** *source address translation* also enabled.  Does this site still work?  Why?
 
 
 Idenity which device handles specific configuration objects in multi-tiered deployment
