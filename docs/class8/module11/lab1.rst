@@ -27,7 +27,7 @@ Create a new local user by going to **System > Users > User List** and
 selecting create.
 
 Create a new user **testuser** with **testpass** as the password and set
-their **Role** to **Manager**, assign them to the **test\_partition**
+their **Role** to **Manager**, assign them to the **my\_partition**
 partition and give them **tmsh Terminal Access**
 
 Open a new private browser to the BIG-IP, or log out and log back in
@@ -56,7 +56,7 @@ Go to the **Virtual Server List**.
 
 *Q2. Do you see the* **test\_vs** *just created?*
 
-Go to the upper right-hand corner and select **test\_partition**. You
+Go to the upper right-hand corner and select **my\_partition**. You
 can now see the **test\_vs** virtual server. Since you are an admin you
 can also modify the virtual server as necessary
 
@@ -76,7 +76,7 @@ In the BIG-IP WebUI go to your **test_vs** virtual server.
 .. NOTE::
 
     **The following lab portion is probably not on the 301, but as I have you playing with
-    partitions this is something if feel you should know.**
+    partitions this is something I feel you should know.**
 
 SSH to the BIG-IP and log in as **root**. **cat** or **more** bigip.conf
 and look for you **test\_vs** virtual::
@@ -105,50 +105,15 @@ Look at your **bigip.conf** in the **test_partition**.
 
 Attempt to exit tmsh to get to the Linux CLI.
 
-*Q7. Where you able to?*
-
-Remote Authentication against LDAP
-----------------------------------
-
-.. NOTE::
-
-   Changes to the lab environment no longer allow this lab to work, but it does give
-   you the general concept of how remote authentication is set up.
-
-Go to **System > Users > Authentication** and select **Change** under **User
-Directory**.
-
-Now select **LDAP** from the **User Directory** drop-down and enter the
-following
-
-+-------------------------+------------------------+
-| Host                    | 10.1.20.252            |
-+-------------------------++-----------------------+
-| Remote Directory Tree   | dc=f5demo,dc=com       |
-+-------------------------+------------------------+
-| Bind DN:                | cn=Directory Manager   |
-+-------------------------+------------------------+
-| Bind Password/Confirm   | default                |
-+-------------------------+------------------------+
-| Role                    | Administrator          |
-+-------------------------+------------------------+
-
-Open a new private browser window to **bigip01** at **https://10.1.1.4** and
-logon using the LDAP account **adminuser/password**.
-
-*Q1. Were you successful?*
-
-Try logging with the local account **testuser/testpass**.
-
-*Q2. Were you successful?*
+*Q7. Where you able to?* 
 
 2.09 - Determine how to deploy or upgrade vCMP guests and how the resources are distributed
 ===========================================================================================
 
-* If in any doubt open a pre-emptive upgrade suppport case.
+* If in any doubt open a pre-emptive upgrade suppport case: https://support.f5.com/csp/article/K16022
 
 Pre-Requisites
-==============
+--------------
 
 Please review the vCMP host and compatible guest version for vCMP.
 
@@ -160,28 +125,23 @@ https://support.f5.com/csp/article/K9476
 
 
 Upgrade path for systems that are Not Viprion
-=============================================
+---------------------------------------------
 
 For Systems that are not Viprions read the following guide for upgrading vCMP.
 The guide provides detailed step by step information about how to upgrade a system (non VIPRION based)
 that is running vCMP.
 
-
 https://support.f5.com/csp/article/K75476930
 
 
 Upgrade path for Viprion based systems running vCMP
-===================================================
+---------------------------------------------------
 
 For Viprion systems please read the following guide.
 The guide provides detailed step by step information about how to upgrade a Viprion based system that is runnning vCMP.
 
-
 https://support.f5.com/csp/article/K14166297
 
-Also Please review the Viprion vCMP upgrade video
+Please also review the Viprion vCMP upgrade video
 
 https://www.youtube.com/watch?v=ti2pOFdY8D0
-
-
-
