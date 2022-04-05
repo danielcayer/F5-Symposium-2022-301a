@@ -8,15 +8,15 @@ Configuration changes to local traffic objects do not affect existing connection
 
 To demonstratte this behavior, let's try modifying a virtual server's SNAT configuration to ovserve the impact on the corresponding connections table for connections established before and after the change.
 
-First, make sure your virtual server is configured with SNAT automap and remove any connection limit that may have been configured in a previous lab exercise::
+First, make sure your virtual server is configured with SNAT set to *none* and remove any connection limit that you might have configured in a previous lab exercise::
 
     modify ltm virtual ftp_vs connection-limit 0 source-address-translation { type none }
 
 Open a *Command Prompt* on your Windows Jumpbox run the command: **ftp 10.1.10.100**. Keep the FTP connection open at the *User* prompt.
 
-Next, while your FTP connection is still open, remove SNAT from your virtual server's configuration::
+Next, while your FTP connection is still open, add SNAT to your virtual server's configuration::
 
-    modify ltm virtual ftp_vs source-address-translation { type none }
+    modify ltm virtual ftp_vs source-address-translation { type automap }
 
 Now open a new FTP connection from a 2nd *Command Prompt* and compare the *Client Addr* values under the *ServerSide* columns for both the old and the new connections.
 
