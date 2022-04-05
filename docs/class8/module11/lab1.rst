@@ -6,28 +6,19 @@ Impact of configuration changes on connections
 
 Configuration changes to local traffic objects do not affect existing connections: https://support.f5.com/csp/article/K13253 
 
-To demonstratte this behavior, let's try modifying the timeout value of a virtual server's tcp profile to ovserve the impact on the corresponding connections table for connections established before and after the change.
+To demonstratte this behavior, let's try modifying a virtual server's SNAT configuration to ovserve the impact on the corresponding connections table for connections established before and after the change.
 
-Create a custom TCP profile with a timeout value of of 600, add it to your virtual server's TCP profile and remove any connection limit that may have been configured in a previous lab exercise.::
+First, make sure your virtual server is configured with SNAT automap and remove any connection limit that may have been configured in a previous lab exercise::
 
-    create ltm profile tcp tcp-600 defaults-from tcp idle-timeout 600
-    modify ltm virtual ftp_vs connection-limit 0 profiles replace-all-with { tcp-600 ftp }
+    modify ltm virtual ftp_vs connection-limit 0 source-address-translation { type none }
 
-Open a Command Prompt on your Windows Jumpbox run the command: **FTP 10.1.10.100**. Keep the FTP connection open at the *User* prompt.
+Open a *Command Prompt* on your Windows Jumpbox run the command: **ftp 10.1.10.100**. Keep the FTP connection open at the *User* prompt.
 
-Observe the *Idle Timeout* value reported in the TMSH connections table::
+Next, while your FTP connection is still open, remove SNAT from your virtual server's configuration::
 
-    show sys connection virtual-server ftp_vs all-properties
+    modify ltm virtual ftp_vs source-address-translation { type none }
 
-Modify your customer TCP profile with a diffeent timeout value::
-
-    modify ltm profile tcp tcp-600 idle-timeout 999
-
-Observe that the *Idle Timeout* value reported in the TMSH connections table did not change::
-    
-    show sys connection virtual-server ftp_vs all-properties
-
-Open a new FTP connection and observe that the *Idle Timeout* value reported in the TMSH connections table reflects the new/modified value.
+Now open a new FTP connection from a 2nd *Command Prompt* and compare the *Client Addr* values under the *ServerSide* columns for both the old and the new connections.
 
 
 2.08 - Explain the uses of user roles, administrative partitions, and route domains
