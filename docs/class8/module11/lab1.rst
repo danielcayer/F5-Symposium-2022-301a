@@ -21,6 +21,7 @@ Next, while your FTP connection is still open, add SNAT to your virtual server's
 On your Windows jumpbox, open a new FTP connection to **10.1.10.100** from a new *Command Prompt*.
 
 Compare the *Client Addr* values under the *ServerSide* columns for both the old and the new connections reported in your BIG-IP's connection table::
+    
     show sys connection virtual-server ftp_vs
 
 2.08 - Explain the uses of user roles, administrative partitions, and route domains
